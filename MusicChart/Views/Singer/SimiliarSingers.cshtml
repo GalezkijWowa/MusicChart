@@ -1,4 +1,4 @@
-﻿@model MusicChart.Models.ViewModels.SingerViewModel
+﻿@model MusicChart.Models.ViewModels.SimiliarSingersViewModel
 
 <h2>@Model.Singer.Name</h2>
 <h3>@Model.Singer.Description</h3>
@@ -11,10 +11,9 @@
 </table>
 
 <h2>Популярные треки</h2>
-@foreach (Song song in Model.SongList)
+@foreach (Singer singer in Model.SimiliarSingers)
 {
-    <h4>@song.Name</h4>
-    <h5>@song.Description</h5>
+    <h4>@singer.Name</h4>
+    <h5>@singer.Description</h5>
 }
-
 

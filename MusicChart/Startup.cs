@@ -24,6 +24,7 @@ namespace MusicChart
         {
             services.AddMvc();
             services.AddTransient<ISingerRepository, FakeSingerRepository>();
+            services.AddTransient<ISongRepository, FakeSongRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

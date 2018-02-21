@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "boot-strap": "*",
-    "jQuery": "3.3.1"
+    "jQuery": "3.3.1",
+      "material-design": "*" 
   }
 }
