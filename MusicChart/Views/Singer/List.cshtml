@@ -1,19 +1,15 @@
 ﻿@model MusicChart.Models.ViewModels.SingerListViewModel
 
-
 <div class="row">
     <div class="col-md-4 col-sm-8">
             @foreach (Singer s in Model.SingerList)
             {
-            <div class="panel panel-default">
+            <div class="table">
                 <a asp-controller="Singer" asp-action="Singer" asp-route-id=@s.SingerId><h3>@s.Name</h3></a>
                 <h4>@s.Description</h4>
             </div>
             }   
     </div>
 </div>
-
-
-
     
 
