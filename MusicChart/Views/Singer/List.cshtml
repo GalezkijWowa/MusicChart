@@ -5,7 +5,7 @@
 
 @foreach(Singer s in Model.SingerList)
 {
-    <h3>@s.Name</h3>
+    <a asp-controller="Singer" asp-action="Singer" asp-route-id=@s.SingerId>@s.Name</a>
     <h4>@s.Description</h4>
 }
 

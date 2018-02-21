@@ -13,7 +13,10 @@ namespace MusicChart.Controllers
         public IActionResult List() => View(new SingerListViewModel
         {
             SingerList = new FakeSingerRepository().Singers
-        }
-            );
+        });
+
+        public IActionResult Singer(string id) =>
+             View(new FakeSingerRepository().Singers.FirstOrDefault(s => s.SingerId == id));   
+            
     }
 }

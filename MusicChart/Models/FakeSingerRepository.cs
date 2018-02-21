@@ -11,16 +11,19 @@ namespace MusicChart.Models
             get => new List<Singer>(){
                 new Singer()
                 {
+                    SingerId="1",
                     Name = "Loboda",
                     Description = "Russian Singer Angelina Loboda"
                 },
                 new Singer()
                 {
+                    SingerId="2",
                     Name = "Eminem",
                     Description="White nigger"
                 },
                 new Singer()
                 {
+                    SingerId="3",
                     Name="Lady Gaga",
                     Description="Most titled American singer"
                 }

@@ -7,7 +7,7 @@ namespace MusicChart.Models
 {
     public class Singer
     {
-        public int SingerId { get; set; }
+        public string SingerId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Song> Songs { get; set; }
