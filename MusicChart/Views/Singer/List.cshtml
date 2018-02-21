@@ -3,9 +3,20 @@
     ViewData["Title"] = "List";
 }
 
-@foreach(Singer s in Model.SingerList)
-{
-    <a asp-controller="Singer" asp-action="Singer" asp-route-id=@s.SingerId>@s.Name</a>
-    <h4>@s.Description</h4>
-}
+<div class="row">
+    <div class="col-md-4 col-sm-8">
+            @foreach (Singer s in Model.SingerList)
+            {
+            <div class="panel panel-default">
+                <a asp-controller="Singer" asp-action="Singer" asp-route-id=@s.SingerId><h3>@s.Name</h3></a>
+                <h4>@s.Description</h4>
+            </div>
+            }   
+
+    </div>
+</div>
+
+
+
+    
 

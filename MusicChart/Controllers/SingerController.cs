@@ -15,8 +15,12 @@ namespace MusicChart.Controllers
             SingerList = new FakeSingerRepository().Singers
         });
 
-        public IActionResult Singer(string id) =>
-             View(new FakeSingerRepository().Singers.FirstOrDefault(s => s.SingerId == id));   
-            
+        public IActionResult Singer(string id) {
+            return View(new SingerViewModel {
+                Singer = new FakeSingerRepository().Singers.FirstOrDefault(s => s.SingerId == id),
+                SongList = new FakeSongRepository().SongList.Where(s => s.SingerId == id)
+        });
+        }  
+           
     }
 }

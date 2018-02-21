@@ -27,8 +27,7 @@ namespace MusicChart.Models
                     Name="Lady Gaga",
                     Description="Most titled American singer"
                 }
-            }
-            ;
+            };
             set => throw new NotImplementedException(); }
     }
 }

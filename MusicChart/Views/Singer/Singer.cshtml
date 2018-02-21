@@ -1,8 +1,15 @@
-﻿@model MusicChart.Models.Singer
+﻿@model MusicChart.Models.ViewModels.SingerViewModel
 @{
     ViewData["Title"] = "Singer";
 }
 
-<h2>@Model.Name</h2>
-<h3>@Model.Description</h3>
+<h3>@Model.Singer.Name</h3>
+<h2>@Model.Singer.Description</h2>
+
+@foreach(Song song in Model.SongList)
+{ 
+    <h4>@song.Name</h4>
+    <h5>@song.Description</h5>
+}
+
 
