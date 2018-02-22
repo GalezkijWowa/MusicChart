@@ -26,7 +26,7 @@ namespace MusicChart.Controllers
         });
 
         public IActionResult Singer(string id) =>
-            View("TestSinger", new SingerViewModel {
+            View(new SingerViewModel {
                 Singer = singerRepository.Singers.FirstOrDefault(s => s.SingerId == id),
                 SongList = songRepository.SongList.Where(s => s.SingerId == id)
         });
@@ -41,7 +41,7 @@ namespace MusicChart.Controllers
             View(new SimiliarSingersViewModel
             {
                 Singer = singerRepository.Singers.FirstOrDefault(s => s.SingerId == id),
-                SimiliarSingers = singerRepository.Singers.Where(s=> s.Name.Contains("a"))
+                SimiliarSingers = singerRepository.Singers.Where(s=> s.Name.Contains("a") || s.Name.Contains("L"))
             });
     }
 }
