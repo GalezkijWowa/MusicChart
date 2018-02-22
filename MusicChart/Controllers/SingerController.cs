@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MusicChart.Models;
 using MusicChart.Models.ViewModels;
+using IF.Lastfm.Core.Api;
+using IF.Lastfm.Core.Api.Helpers;
+using IF.Lastfm.Core.Objects;
 
 namespace MusicChart.Controllers
 {
@@ -18,6 +21,13 @@ namespace MusicChart.Controllers
             singerRepository = singerRepo;
             songRepository = songRepo;
         }
+
+        //public async IActionResult Index()
+        //{
+        //    LastAuth la = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
+        //    ChartApi ch = new ChartApi(la);
+        //    PageResponse<LastArtist> resp = await ch.GetTopArtistsAsync();
+        //}
 
 
         public IActionResult List() => View(new SongerListViewModel
