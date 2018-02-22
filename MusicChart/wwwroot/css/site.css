@@ -10,9 +10,6 @@ body, table {
     font: 15px YandexSans,Arial,Helvetica,sans-serif;
     background: #f6f5f3;
 }
-a{
-    color:black;
-}
 .panel {
     border: none;
     background-color: white;

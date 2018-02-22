@@ -1,19 +1,20 @@
 ﻿@model MusicChart.Models.ViewModels.SimiliarSingersViewModel
 
-<h2>@Model.Singer.Name</h2>
-<h3>@Model.Singer.Description</h3>
-<table style="width:40%">
-    <tr>
-        <th><a asp-controller="Singer" asp-action="Singer" asp-route-id=@Model.Singer.SingerId><h3>Главное</h3></a></th>
-        <th><a asp-controller="Singer" asp-action="SingerSongs" asp-route-id=@Model.Singer.SingerId><h3>Треки</h3></a></th>
-        <th><a asp-controller="Singer" asp-action="SimiliarSingers" asp-route-id=@Model.Singer.SingerId><h3>Похожие</h3></a></th>
-    </tr>
-</table>
+<link href="~/css/list.css" rel="stylesheet" />
+    <h2>@Model.Singer.Name</h2>
+    <h3>@Model.Singer.Description</h3>
+    <table style="width:40%">
+        <tr>
+            <th><a asp-controller="Singer" asp-action="Singer" asp-route-id=@Model.Singer.SingerId><h3>Главное</h3></a></th>
+            <th><a asp-controller="Singer" asp-action="SingerSongs" asp-route-id=@Model.Singer.SingerId><h3>Треки</h3></a></th>
+            <th><a asp-controller="Singer" asp-action="SimiliarSingers" asp-route-id=@Model.Singer.SingerId><h3>Похожие</h3></a></th>
+        </tr>
+    </table>
 
-<h2>Популярные треки</h2>
-@foreach (Singer singer in Model.SimiliarSingers)
-{
-    <h4>@singer.Name</h4>
-    <h5>@singer.Description</h5>
-}
+    <h2>Популярные треки</h2>
+    @foreach (Singer singer in Model.SimiliarSingers)
+    {
+        <h4>@singer.Name</h4>
+        <h5>@singer.Description</h5>
+    }
 
