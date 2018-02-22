@@ -28,6 +28,6 @@ namespace MusicChart.Models
                     Description="Most titled American singer"
                 }
             };
-            set => throw new NotImplementedException(); }
+        }
     }
 }

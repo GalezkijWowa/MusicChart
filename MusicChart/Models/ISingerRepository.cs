@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace MusicChart.Models
 {
-    interface ISingerRepository
+    public interface ISingerRepository
     {
-        IEnumerable<Singer> Singers { get; set; }
+        IEnumerable<Singer> Singers { get; }
     }
 }

@@ -22,17 +22,18 @@ namespace MusicChart
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
             services.AddTransient<ISingerRepository, FakeSingerRepository>();
             services.AddTransient<ISongRepository, FakeSongRepository>();
+            services.AddMvc();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
             }
             else
             {

@@ -10,6 +10,16 @@ namespace MusicChart.Controllers
 {
     public class SingerController : Controller
     {
+        private ISingerRepository singerRepository;
+        private ISongRepository songRepository;
+
+        public SingerController(ISingerRepository singerRepo, ISongRepository songRepo)
+        {
+            singerRepository = singerRepo;
+            songRepository = songRepo;
+        }
+
+
         public IActionResult List() => View(new SingerListViewModel
         {
             SingerList = new FakeSingerRepository().Singers
@@ -17,21 +27,21 @@ namespace MusicChart.Controllers
 
         public IActionResult Singer(string id) =>
             View(new SingerViewModel {
-                Singer = new FakeSingerRepository().Singers.FirstOrDefault(s => s.SingerId == id),
-                SongList = new FakeSongRepository().SongList.Where(s => s.SingerId == id)
+                Singer = singerRepository.Singers.FirstOrDefault(s => s.SingerId == id),
+                SongList = songRepository.SongList.Where(s => s.SingerId == id)
         });
          
         public IActionResult SingerSongs(string id)=>
             View("Singer", new SingerViewModel
             {
-                Singer = new FakeSingerRepository().Singers.FirstOrDefault(s => s.SingerId == id),
-                SongList = new FakeSongRepository().SongList.Where(s => s.SingerId == id)
+                Singer = singerRepository.Singers.FirstOrDefault(s => s.SingerId == id),
+                SongList = songRepository.SongList.Where(s => s.SingerId == id)
             });
         public IActionResult SimiliarSingers(string id) =>
             View(new SimiliarSingersViewModel
             {
-                Singer = new FakeSingerRepository().Singers.FirstOrDefault(s => s.SingerId == id),
-                SimiliarSingers = new FakeSingerRepository().Singers.Where(s=> s.Name.Contains("a"))
+                Singer = singerRepository.Singers.FirstOrDefault(s => s.SingerId == id),
+                SimiliarSingers = singerRepository.Singers.Where(s=> s.Name.Contains("a"))
             });
     }
 }

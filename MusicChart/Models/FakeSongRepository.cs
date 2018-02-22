@@ -47,6 +47,6 @@ namespace MusicChart.Models
                 }
             };
 
-            set => throw new NotImplementedException(); }
+        }
     }
 }
