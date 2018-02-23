@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using IF.Lastfm.Core.Api;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +27,10 @@ namespace MusicChart
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //services.AddTransient<ILastAuth, LastAuth>(options =>
+            //    options.apikey = Configuration.GetValue["LastFmInfo:apikey"];
+            //    options.secret = Configuration["LastFmInfo:apisecret"];
+            //    );
             services.AddTransient<ISingerRepository, FakeSingerRepository>();
             services.AddTransient<ISongRepository, FakeSongRepository>();
             services.AddAutoMapper();

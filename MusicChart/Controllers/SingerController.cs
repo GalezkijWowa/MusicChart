@@ -14,12 +14,14 @@ namespace MusicChart.Controllers
 {
     public class SingerController : Controller
     {
+        private ILastAuth _lastAuth;
         private readonly IMapper _mapper;
         private ISingerRepository _singerRepository;
         private ISongRepository _songRepository;
 
         public SingerController(ISingerRepository singerRepo, ISongRepository songRepo, IMapper mapper)
         {
+            _lastAuth = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
             _singerRepository = singerRepo;
             _songRepository = songRepo;
             _mapper = mapper;
@@ -27,9 +29,7 @@ namespace MusicChart.Controllers
 
         public async Task<IActionResult> SingerList()
         {
-            LastAuth la = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
-            ChartApi ch = new ChartApi(la);
-            PageResponse<LastArtist> resp = await ch.GetTopArtistsAsync();
+            PageResponse<LastArtist> resp = await new ChartApi(_lastAuth).GetTopArtistsAsync();
             List<Singer> singers = new List<Singer>();
 
             foreach (var artist in resp.Content)
@@ -49,9 +49,7 @@ namespace MusicChart.Controllers
 
         public async Task<IActionResult> Singer(string id)
         {
-            LastAuth la = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
-            ArtistApi artistApi = new ArtistApi(la);
-            PageResponse<LastTrack> resp = await artistApi.GetTopTracksForArtistAsync(id);
+            PageResponse<LastTrack> resp = await new ArtistApi(_lastAuth).GetTopTracksForArtistAsync(id);
             List<Song> songs = new List<Song>();
             Singer singer = new Singer
             {
@@ -67,19 +65,16 @@ namespace MusicChart.Controllers
                 }
                 );
             }
-            return View(new SingerViewModel
+            return View(new SingerSongsViewModel
             {
                Singer = singer,
                SongList = songs
             });
         }
             
-
         public async Task<IActionResult> SingerAlbums(string id)
         {
-            LastAuth la = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
-            ArtistApi artistApi = new ArtistApi(la);
-            PageResponse<LastAlbum> resp = await artistApi.GetTopAlbumsForArtistAsync(id);
+            PageResponse<LastAlbum> resp = await new ArtistApi(_lastAuth).GetTopAlbumsForArtistAsync(id);
             List<Album> albums = new List<Album>();
             Singer singer = new Singer
             {
@@ -102,11 +97,30 @@ namespace MusicChart.Controllers
             });
         }
 
-        public IActionResult SingerSimiliar(string id) =>
-            View(new SingerSimiliarViewModel
+        public async Task<IActionResult> SingerSimiliar(string id)
+        {
+            PageResponse<LastArtist> resp = await new ArtistApi(_lastAuth).GetSimilarArtistsAsync(id);
+            List<Singer> singers = new List<Singer>();
+
+            foreach (var artist in resp.Content)
             {
-                Singer = _singerRepository.Singers.FirstOrDefault(s => s.SingerId == id),
-                SimiliarSingers = _singerRepository.Singers.Where(s => s.Name.Contains("a") || s.Name.Contains("L"))
+                singers.Add(new Singer
+                {
+                    Name = artist.Name,
+                    Photo = artist.MainImage.ExtraLarge
+                }
+                );
+            }
+            Singer singer = new Singer
+            {
+                SingerId = id,
+                Name = id
+            };
+            return View(new SingerSimiliarViewModel
+            {
+                SimiliarSingers = singers,
+                Singer = singer
             });
+        }
     }
 }
