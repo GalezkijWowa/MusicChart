@@ -122,5 +122,10 @@ namespace MusicChart.Controllers
                 Singer = singer
             });
         }
+        //private async Singer MapSinger(string id)
+        //{
+        //    PageResponse<LastArtist> resp = await new ArtistApi(_lastAuth).GetArtistInfoAsync(id);
+        //    return new Singer();
+        //}
     }
 }
