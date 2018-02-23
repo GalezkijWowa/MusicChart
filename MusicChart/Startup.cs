@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,7 @@ namespace MusicChart
         {
             services.AddTransient<ISingerRepository, FakeSingerRepository>();
             services.AddTransient<ISongRepository, FakeSongRepository>();
+            services.AddAutoMapper();
             services.AddMvc();
         }
 
@@ -49,7 +51,7 @@ namespace MusicChart
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Singer}/{action=List}/{id?}");
+                    template: "{controller=Singer}/{action=SingerList}/{id?}");
             });
         }
     }

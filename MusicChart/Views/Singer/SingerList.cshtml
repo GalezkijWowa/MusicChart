@@ -1,0 +1,39 @@
+﻿@model MusicChart.Models.ViewModels.SingerListViewModel
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/css/list.css" rel="stylesheet" />
+
+<div class="blog">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3 text-center">
+                <h2><span class="ion-minus"></span>Главное<span class="ion-minus"></span></h2>
+                <p>Мы отбираем новинки на основе публикаций о самых ожидаемых релизах 2018 года. 67 136 · 84 трека. Инди-зависимость. Лучшее новое инди каждый день! 1 869 · 50 треков. Саундтреки. Музыка из самых последних фильмов, сериалов, мультфильмов и видеоигр. </p><br>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (Singer singer in Model.Singers)
+            {
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" data-aos="fade-right">
+
+                    <div class="col-lg-6 col-xs-12">
+                        <img style="height: 250px; width: 250px" src=@singer.Photo alt="">
+                    </div>
+                    <div class="col-lg-6 col-xs-12">
+                        <div class="blog-column">
+                            <span style="font-size:20px;">@singer.Name</span>
+                        </div>
+                    </div>
+                    <div style="margin:300px 0px;"></div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
