@@ -1,4 +1,7 @@
-﻿@model MusicChart.Models.ViewModels.SimiliarSingersViewModel
+﻿@model MusicChart.Models.ViewModels.SingerAlbumsViewModel
+@{
+    ViewData["Title"] = "SingerAlbums";
+}
 
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
@@ -10,9 +13,9 @@
 <div class="blog">
     <div class="container">
         <div class="row">
-            <div class="col-sm-3">
-                <div class="ratio img-responsive img-circle" style="background-image: url(@Model.Singer.Photo);"></div>
-            </div>
+            @*<div class="col-sm-3">
+                    <div class="ratio img-responsive img-circle" style="background-image: url(@Model.Singer.Photo);"></div>
+                </div>*@
             <div class="col-sm-9">
                 <h1>
                     <b>@Model.Singer.Name</b>
@@ -30,28 +33,26 @@
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a asp-controller="Singer" asp-action="Singer" asp-route-id=@Model.Singer.SingerId class="navbar-brand">Главное</a>
-                    <a asp-controller="Singer" asp-action="SingerSongs" asp-route-id=@Model.Singer.SingerId class="navbar-brand">Треки</a>
-                    <a asp-controller="Singer" asp-action="SimiliarSingers" asp-route-id=@Model.Singer.SingerId class="navbar-brand"><b>Похожие</b></a>
+                    <a asp-controller="Singer" asp-action="Singer" asp-route-id=@Model.Singer.Name class="navbar-brand"><b>Треки</b></a>
+                    <a asp-controller="Singer" asp-action="SingerAlbums" asp-route-id=@Model.Singer.Name class="navbar-brand">Альбомы</a>
+                    <a asp-controller="Singer" asp-action="SimiliarSingers" asp-route-id=@Model.Singer.Name class="navbar-brand">Похожие</a>
                 </div>
             </div>
         </nav>
         <div class="row">
             <div class="[ col-xs-12 col-sm-offset-0 col-sm-10 ]">
-                @foreach (Singer singer in Model.SimiliarSingers)
-                {
-                    <div class="col-sm-3">
-                        <div class="ratio img-responsive img-circle" style="background-image: url(@singer.Photo);"></div>
-                    </div>
-                    <h3><a asp-action="Singer" asp-route-id=@singer.SingerId>@singer.Name</a></h3>
-                    <h4>@singer.Description</h4>
-                    <div style="margin:100px 0px;"></div>
-                    <hr/>
-                }
+                <ul class="event-list">
+                    @foreach (var album in Model.Albums)
+                    {
+                        <li>
+                            <img alt="No image" src=@album.Image />
+                            <div class="info">
+                                <h2 class="title">@album.Name</h2>
+                            </div>
+                        </li>
+                    }
+                </ul>
             </div>
-            </div>
+        </div>
     </div>
 </div>
-
-
-

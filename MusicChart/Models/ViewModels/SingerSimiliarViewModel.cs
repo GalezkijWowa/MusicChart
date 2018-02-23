@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MusicChart.Models.ViewModels
 {
-    public class SimiliarSingersViewModel
+    public class SingerSimiliarViewModel
     {
         public Singer Singer { get; set; }
         public IEnumerable<Singer> SimiliarSingers { get; set; }

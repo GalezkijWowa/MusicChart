@@ -41,54 +41,72 @@ namespace MusicChart.Controllers
                 }
                 );
             }
-
             return View(new SingerListViewModel
             {
                 Singers = singers
             });
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Singer(string id)
         {
             LastAuth la = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
-            ChartApi ch = new ChartApi(la);
-            PageResponse<LastArtist> resp = await ch.GetTopArtistsAsync();
-
-            List<Singer> singers = new List<Singer>();
-            
-            foreach (var artist in resp.Content)
+            ArtistApi artistApi = new ArtistApi(la);
+            PageResponse<LastTrack> resp = await artistApi.GetTopTracksForArtistAsync(id);
+            List<Song> songs = new List<Song>();
+            Singer singer = new Singer
             {
-                singers.Add(_mapper.Map<Singer>(artist));
+                SingerId = id,
+                Name = id
+            };
+            foreach (var song in resp.Content)
+            {
+                songs.Add(new Song
+                {
+                    Name = song.Name,
+                    Image = song.Images.ExtraLarge
+                }
+                );
             }
-            return View(new IndexViewModel {
+            return View(new SingerViewModel
+            {
+               Singer = singer,
+               SongList = songs
+            });
+        }
+            
 
-                Artists = singers
+        public async Task<IActionResult> SingerAlbums(string id)
+        {
+            LastAuth la = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
+            ArtistApi artistApi = new ArtistApi(la);
+            PageResponse<LastAlbum> resp = await artistApi.GetTopAlbumsForArtistAsync(id);
+            List<Album> albums = new List<Album>();
+            Singer singer = new Singer
+            {
+                SingerId = id,
+                Name=id
+            };
+            foreach (var album in resp.Content)
+            {
+                albums.Add(new Album
+                {
+                    Name = album.Name,
+                    Image = album.Images.ExtraLarge
+                }
+                );
+            }
+            return View(new SingerAlbumsViewModel
+            {
+                Albums = albums,
+                Singer = singer
             });
         }
 
-
-        public IActionResult List() => View(new SongerListViewModel
-        {
-            SongList = _songRepository.SongList
-        });
-
-        public IActionResult Singer(string id) =>
-            View(new SingerViewModel {
-                Singer = _singerRepository.Singers.FirstOrDefault(s => s.SingerId == id),
-                SongList = _songRepository.SongList.Where(s => s.SingerId == id)
-        });
-         
-        public IActionResult SingerSongs(string id)=>
-            View("Singer", new SingerViewModel
+        public IActionResult SingerSimiliar(string id) =>
+            View(new SingerSimiliarViewModel
             {
                 Singer = _singerRepository.Singers.FirstOrDefault(s => s.SingerId == id),
-                SongList = _songRepository.SongList.Where(s => s.SingerId == id)
-            });
-        public IActionResult SimiliarSingers(string id) =>
-            View(new SimiliarSingersViewModel
-            {
-                Singer = _singerRepository.Singers.FirstOrDefault(s => s.SingerId == id),
-                SimiliarSingers = _singerRepository.Singers.Where(s=> s.Name.Contains("a") || s.Name.Contains("L"))
+                SimiliarSingers = _singerRepository.Singers.Where(s => s.Name.Contains("a") || s.Name.Contains("L"))
             });
     }
 }
