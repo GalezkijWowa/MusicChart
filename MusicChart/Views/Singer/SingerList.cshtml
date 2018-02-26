@@ -5,6 +5,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="~/css/card.css" rel="stylesheet" />
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
 <link href="~/css/list.css" rel="stylesheet" />
 <div class="blog">
     <div class="container">
@@ -13,7 +14,11 @@
                 <h2><span class="ion-minus"></span>Главное<span class="ion-minus"></span></h2>
                 <p>Мы отбираем новинки на основе публикаций о самых ожидаемых релизах 2018 года. 67 136 · 84 трека. Инди-зависимость. Лучшее новое инди каждый день! 1 869 · 50 треков. Саундтреки. Музыка из самых последних фильмов, сериалов, мультфильмов и видеоигр. </p><br>
                 <hr />
+                <div page-model="@Model.PageInfo" page-action="SingerList" type="button" class="btn btn-primary"></div>
             </div>
+            <a asp-controller="Singer" asp-action="ChangeSize" asp-route-size=10 type="button" class="btn btn-primary">10</a>
+            <a asp-controller="Singer" asp-action="ChangeSize" asp-route-size=25 type="button" class="btn btn-primary">25</a>
+            <a asp-controller="Singer" asp-action="ChangeSize" asp-route-size=50 type="button" class="btn btn-primary">50</a>
         </div>
         <div style="margin:200px 0px;"></div>
         <div class="row">
@@ -35,6 +40,7 @@
                     <div style="margin:400px 0px;"></div>
                 </div>
             }
-        </div>
+        </div>        
     </div>
 </div>
+

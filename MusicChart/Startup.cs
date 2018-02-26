@@ -55,6 +55,12 @@ namespace MusicChart
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "pagination",
+                    template: "Singer/SingerList/Page{page}",
+                    defaults: new { Controller = "Singer", Action = "SingerList" }
+                    );
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Singer}/{action=SingerList}/{id?}");
             });

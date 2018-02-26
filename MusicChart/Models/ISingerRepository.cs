@@ -7,6 +7,9 @@ namespace MusicChart.Models
 {
     public interface ISingerRepository
     {
-        IEnumerable<Singer> Singers { get; }
+        Task<List<Singer>> GetSingersAsync(int pageSize=1, int itemsPerPage=20);
+        Task<List<Singer>> GetSimiliarSingersAsync(string singerName);
+        Task<Singer> GetSingerInfoAsync(string singerName);
+        Task<int> TotalSingers();
     }
 }

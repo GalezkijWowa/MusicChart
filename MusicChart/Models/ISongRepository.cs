@@ -7,6 +7,6 @@ namespace MusicChart.Models
 {
     public interface ISongRepository
     {
-        IEnumerable<Song> SongList { get; }
+        Task<List<Song>> GetTopSongsAsync(string singerName);
     }
 }
