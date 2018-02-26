@@ -17,7 +17,7 @@ span.song-name{
 }
 
 .blog {
-    background-color: #f6f6f6;
+    background-color: white;
     padding: 60px 0px;
     font-family: 'Raleway', sans-serif;
 }
@@ -38,6 +38,6 @@ span.song-name{
 
 .fa.fa-user, .fa.fa-clock-o {
     padding-right: 10px;
-    color: #909090;
+    color:white;
     font-size: 11px;
 }

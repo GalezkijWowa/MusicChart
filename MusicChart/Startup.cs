@@ -31,8 +31,8 @@ namespace MusicChart
             //    options.apikey = Configuration.GetValue["LastFmInfo:apikey"];
             //    options.secret = Configuration["LastFmInfo:apisecret"];
             //    );
-            services.AddTransient<ISingerRepository, FakeSingerRepository>();
-            services.AddTransient<ISongRepository, FakeSongRepository>();
+            //services.AddTransient<ISingerRepository, FakeSingerRepository>();
+            //services.AddTransient<ISongRepository, FakeSongRepository>();
             services.AddAutoMapper();
             services.AddMvc();
         }

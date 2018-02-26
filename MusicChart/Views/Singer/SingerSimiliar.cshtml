@@ -1,33 +1,51 @@
 ﻿@model MusicChart.Models.ViewModels.SingerSimiliarViewModel
-
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
 <link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/css/card.css" rel="stylesheet" />
 <link href="~/css/list.css" rel="stylesheet" />
-
 <div class="blog">
     <div class="container">
-
         @Html.Partial("UserSection", @Model.Singer)
         <div class="row">
             @foreach (Singer singer in Model.SimiliarSingers)
-        {
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" data-aos="fade-right">
+            {
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" data-aos="fade-right">
+                    <div class="col-lg-4 col-xs-12">
+                        <a asp-controller="Singer" asp-action="Singer" asp-route-id=@singer.Name>
+                            <div id="curve" class="card" style="background-image:url(@singer.Photo);">
+                                <div class="footer">
+                                    <svg id="curve">
+                                        <path id="p" d="M0,200 Q80,100 400,200 V150 H0 V50" transform="translate(0 300)" />
+                                        <rect id="dummyRect" x="0" y="0" height="450" width="400"
+                                              fill="transparent" />
+                                        <!-- slide up-->
+                                        <animate xlink:href="#p" attributeName="d" to="M0,50 Q80,100 400,50 V150 H0 V50" fill="freeze" begin="dummyRect.mouseover" end="dummyRect.mouseout" dur="0.1s" id="bounce1" />
+                                        <!-- slide up and curve in -->
+                                        <animate xlink:href="#p" attributeName="d" to="M0,50 Q80,0 400,50 V150 H0 V50" fill="freeze" begin="bounce1.end" end="dummyRect.mouseout" dur="0.15s" id="bounce2" />
+                                        <!-- slide down and curve in -->
+                                        <animate xlink:href="#p" attributeName="d" to="M0,50 Q80,80 400,50 V150 H0 V50" fill="freeze" begin="bounce2.end" end="dummyRect.mouseout" dur="0.15s" id="bounce3" />
+                                        <!-- slide down and curve out -->
+                                        <animate xlink:href="#p" attributeName="d" to="M0,50 Q80,45 400,50 V150 H0 V50" fill="freeze" begin="bounce3.end" end="dummyRect.mouseout" dur="0.1s" id="bounce4" />
+                                        <!-- curve in -->
+                                        <animate xlink:href="#p" attributeName="d" to="M0,50 Q80,50 400,50 V150 H0 V50" fill="freeze" begin="bounce4.end" end="dummyRect.mouseout" dur="0.05s" id="bounce5" />
 
-                <div class="col-lg-6 col-xs-12">
-                    <img style="height: 250px; width: 250px" src=@singer.Photo alt="">
-                </div>
-                <div class="col-lg-6 col-xs-12">
-                    <div class="blog-column">
-                        <span style="font-size:20px;"><a asp-controller="Singer" asp-action="Singer" asp-route-id=@singer.Name>@singer.Name</a></span>
+                                        <animate xlink:href="#p" attributeName="d" to="M0,200 Q80,100 400,200 V150 H0 V50" fill="freeze" begin="dummyRect.mouseout" dur="0.15s" id="bounceOut" />
+                                    </svg>
+                                    <div class="info">
+                                        <div class="name"><a asp-controller="Singer" asp-action="Singer" asp-route-id=@singer.Name>@singer.Name</a></div>
+                                        <div class="job">Architect Manager</div>
+                                    </div>
+                                </div>
+                                <div class="card-blur"></div>
+                            </div>
+                        </a>
+                        <div style="margin:400px 0px;"></div>
                     </div>
                 </div>
-                <div style="margin:300px 0px;"></div>
-            </div>
-    }
+            }
         </div>
     </div>
 </div>

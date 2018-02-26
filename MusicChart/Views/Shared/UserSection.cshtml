@@ -1,41 +1,35 @@
 ﻿@model MusicChart.Models.Singer
-
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="~/css/singer.css" rel="stylesheet" />
 <link href="~/css/list.css" rel="stylesheet" />
 <link href="~/css/main-info.css" rel="stylesheet" />
-
 <div class="blog">
     <div class="container">
         <div class="row">
-            @*<div class="col-sm-3">
-                    <div class="ratio img-responsive img-circle" style="background-image: url(@Model.Singer.Photo);"></div>
-                </div>*@
-            <div class="col-sm-9">
-                <h1>
-                    <b>@Model.Name</b>
-                    <a href="#facebook"><span class="fa fa-facebook"></span></a>
-                    <a href="#twitter"><span class="fa fa-twitter"></span></a>
-                    <a href="#google-plus"><span class="fa fa-instagram"></span></a>
-                </h1>
+            <div class="col-sm-3">
+                <div class="ratio img-responsive img-circle" style="background-image: url(@Model.Photo);"></div>
+            </div>
+            <div class="col-md-8;">
+                <h1><b>@Model.Name</b></h1>
                 <h4>@Model.Description</h4>
             </div>
         </div>
-        <nav class="navbar navbar-default">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-controller="Singer" asp-action="Singer" asp-route-id=@Model.Name class="navbar-brand"><b>Треки</b></a>
-                    <a asp-controller="Singer" asp-action="SingerAlbums" asp-route-id=@Model.Name class="navbar-brand">Альбомы</a>
-                    <a asp-controller="Singer" asp-action="SingerSimiliar" asp-route-id=@Model.Name class="navbar-brand">Похожие</a>
+        <div class="row">
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a asp-controller="Singer" asp-action="Singer" asp-route-id=@Model.SingerId class="navbar-brand"><b>Треки</b></a>
+                        <a asp-controller="Singer" asp-action="SingerAlbums" asp-route-id=@Model.SingerId class="navbar-brand">Альбомы</a>
+                        <a asp-controller="Singer" asp-action="SingerSimiliar" asp-route-id=@Model.SingerId class="navbar-brand">Похожие</a>
+                    </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </div>
 </div>
-

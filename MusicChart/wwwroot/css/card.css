@@ -1,0 +1,147 @@
+﻿html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+.background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-image: url(https://s2.postimg.org/tzymg4j15/background.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-filter: blur(30px);
+    filter: blur(30px);
+}
+
+.card {
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    /*background-image: url(https://s8.postimg.org/jqyxb0291/card.png);*/
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 0 80px -10px black;
+    overflow: hidden;
+}
+
+.card-blur {
+    position: absolute;
+    height: 100%;
+    width: calc(100% + 1px);
+    background-color: black;
+    opacity: 0;
+    transition: opacity 0.15s ease-in;
+}
+
+.card:hover .card-blur {
+    opacity: 0.6;
+}
+
+.footer {
+    z-index: 1;
+    position: absolute;
+    height: 80px;
+    width: 100%;
+    bottom: 0;
+}
+
+svg#curve {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 400px;
+    height: 450px;
+}
+
+.connections {
+    height: 80px;
+    width: 400px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100px;
+    margin: auto;
+}
+
+.connection {
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 25px;
+    transform: translateY(200px);
+    transition: transform 1s cubic-bezier(.46, 1.48, .18, .81);
+}
+
+.card:hover .connection {
+    transform: translateY(0px);
+}
+
+.connection.facebook {
+    margin-left: 20px;
+    padding: 5px;
+}
+
+.connection.twitter {
+    transition-delay: 0.02s;
+}
+
+.connection.behance {
+    transition-delay: 0.04s;
+}
+
+.connection.facebook .icon {
+    height: 18px;
+    width: 18px;
+    margin-top: 4px;
+    margin-left: 4px;
+    background-image: url(https://s17.postimg.org/sial0g69n/image.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.connection.twitter .icon {
+    height: 100%;
+    width: 100%;
+    background-image: url(https://s15.postimg.org/52t96zfyv/twitter.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.connection.behance .icon {
+    height: 100%;
+    width: 100%;
+    background-image: url(https://s27.postimg.org/vxbjv87e7/behance.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.info {
+    font-family: Inconsolata;
+    padding-left: 20px;
+    transform: translateY(250px);
+    transition: transform 1s cubic-bezier(.31,1.21,.64,1.02);
+}
+
+.card:hover .info {
+    transform: translateY(0px);
+}
+
+.name {
+    font-weight: bolder;
+    padding-top: 5px;
+}
+
+.job {
+    margin-top: 10px;
+}
