@@ -3,30 +3,37 @@
     ViewData["Title"] = "SingerAlbums";
 }
 
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="~/css/singer.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="~/css/card.css" rel="stylesheet" />
 <link href="~/css/list.css" rel="stylesheet" />
-<link href="~/css/main-info.css" rel="stylesheet" />
 
 <div class="blog">
     <div class="container">
         @Html.Partial("UserSection", @Model.Singer)
+        <div style="margin:200px 0px;"></div>
         <div class="row">
-            <div class="[ col-xs-12 col-sm-offset-0 col-sm-10 ]">
-                <ul class="event-list">
-                    @foreach (var album in Model.Albums)
-                    {
-                    <li>
-                        <img alt="No image" src=@album.Image />
-                        <div class="info">
-                            <h2 class="title">@album.Name</h2>
+            @foreach (Album album in Model.Albums)
+            {
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" data-aos="fade-right">
+                <div class="col-lg-4 col-xs-12">
+                    <a asp-controller="Singer" asp-action="Album" asp-route-id=@Model.Singer.Name asp-route-albumName=@album.Name>
+                        <div id="curve" class="card" style="background-image:url(@album.Image);">
+                            <div class="footer">                     
+                                <div class="info">
+                                    <div class="name">@album.Name</div>
+                                </div>
+                            </div>
+                            <div class="card-blur"></div>
                         </div>
-                    </li>
-                     }
-                </ul>
+                    </a>
+                </div>
+                <div style="margin:400px 0px;"></div>
             </div>
+            }
         </div>
     </div>
 </div>

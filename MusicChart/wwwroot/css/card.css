@@ -25,7 +25,6 @@ body {
     left: 0;
     bottom: 0;
     margin: auto;
-    /*background-image: url(https://s8.postimg.org/jqyxb0291/card.png);*/
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -87,45 +86,6 @@ svg#curve {
     transform: translateY(0px);
 }
 
-.connection.facebook {
-    margin-left: 20px;
-    padding: 5px;
-}
-
-.connection.twitter {
-    transition-delay: 0.02s;
-}
-
-.connection.behance {
-    transition-delay: 0.04s;
-}
-
-.connection.facebook .icon {
-    height: 18px;
-    width: 18px;
-    margin-top: 4px;
-    margin-left: 4px;
-    background-image: url(https://s17.postimg.org/sial0g69n/image.png);
-    background-position: center;
-    background-size: cover;
-}
-
-.connection.twitter .icon {
-    height: 100%;
-    width: 100%;
-    background-image: url(https://s15.postimg.org/52t96zfyv/twitter.png);
-    background-position: center;
-    background-size: cover;
-}
-
-.connection.behance .icon {
-    height: 100%;
-    width: 100%;
-    background-image: url(https://s27.postimg.org/vxbjv87e7/behance.png);
-    background-position: center;
-    background-size: cover;
-}
-
 .info {
     font-family: Inconsolata;
     padding-left: 20px;
@@ -140,8 +100,6 @@ svg#curve {
 .name {
     font-weight: bolder;
     padding-top: 5px;
-}
-
-.job {
     margin-top: 10px;
+    font-size: 30px;
 }

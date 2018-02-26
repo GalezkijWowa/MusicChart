@@ -1,0 +1,44 @@
+﻿@model MusicChart.Models.ViewModels.AlbumViewModel
+@{
+    ViewData["Title"] = Model.Album.Name;
+}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="~/css/singer.css" rel="stylesheet" />
+<link href="~/css/list.css" rel="stylesheet" />
+<link href="~/css/main-info.css" rel="stylesheet" />
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+<div class="blog">
+    <div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="ratio img-responsive img-circle" style="background-image: url(@Model.Album.Image);"></div>
+                </div>
+                <div class="col-md-4">
+                    <h1><b>@Model.Album.Name</b></h1>
+                    <h2><a asp-controller="Singer" asp-action="Singer" asp-route-id=@Model.Album.Singer.Name>@Model.Album.Singer.Name</a></h2>
+                </div>
+            </div>
+            <div class="[ col-xs-12 col-sm-offset-0 col-sm-10 ]">
+                <ul class="card-header-tabs">
+                    @foreach (Song s in Model.Album.Songs)
+                     {
+                        <li>
+                            <div class="info">
+                                <h2 class="title">@s.Name</h2>
+                                <hr />
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

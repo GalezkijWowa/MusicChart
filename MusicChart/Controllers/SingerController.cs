@@ -16,14 +16,10 @@ namespace MusicChart.Controllers
     {
         private ILastAuth _lastAuth;
         private readonly IMapper _mapper;
-        //private ISingerRepository _singerRepository;
-        //private ISongRepository _songRepository;
 
         public SingerController(IMapper mapper)
         {
             _lastAuth = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
-            //_singerRepository = singerRepo;
-            //_songRepository = songRepo;
             _mapper = mapper;
         }
 
@@ -55,8 +51,9 @@ namespace MusicChart.Controllers
             Singer singer = new Singer
             {
                 SingerId = singerResp.Content.Name,
-                Name = singerResp.Content.Id,
-                Photo = singerResp.Content.MainImage.ExtraLarge
+                Name = singerResp.Content.Name,
+                Photo = singerResp.Content.MainImage.ExtraLarge,
+                Description=singerResp.Content.Bio.Summary
             };
             foreach (var song in resp.Content)
             {
@@ -82,8 +79,9 @@ namespace MusicChart.Controllers
             Singer singer = new Singer
             {
                 SingerId = singerResp.Content.Name,
-                Name = singerResp.Content.Id,
-                Photo = singerResp.Content.MainImage.ExtraLarge
+                Name = singerResp.Content.Name,
+                Photo = singerResp.Content.MainImage.ExtraLarge,
+                Description = singerResp.Content.Bio.Summary
             };
             foreach (var album in resp.Content)
             {
@@ -119,13 +117,50 @@ namespace MusicChart.Controllers
             Singer singer = new Singer
             {
                 SingerId = singerResp.Content.Name,
-                Name = singerResp.Content.Id,
-                Photo = singerResp.Content.MainImage.ExtraLarge
+                Name = singerResp.Content.Name,
+                Photo = singerResp.Content.MainImage.ExtraLarge,
+                Description = singerResp.Content.Bio.Summary
             };
             return View(new SingerSimiliarViewModel
             {
                 SimiliarSingers = singers,
                 Singer = singer
+            });
+        }
+
+
+        public async Task<IActionResult> Album(string id, string albumName)
+        {
+            LastResponse<LastAlbum> resp = await new AlbumApi(_lastAuth).GetAlbumInfoAsync(id, albumName);
+            List<Song> albumSongs = new List<Song>();
+            LastResponse<LastArtist> singerResp = await new ArtistApi(_lastAuth).GetArtistInfoAsync(id);
+            Singer singer = new Singer
+            {
+                SingerId = singerResp.Content.Name,
+                Name = singerResp.Content.Name,
+                Photo = singerResp.Content.MainImage.ExtraLarge,
+                Description = singerResp.Content.Bio.Summary
+            };
+            foreach (var song in resp.Content.Tracks)
+            {
+                albumSongs.Add(new Song
+                {
+                    Name = song.Name,
+                    //Image = song.Images.ExtraLarge
+                }
+                );
+            }
+
+            Album album = new Album
+            {
+                Name = resp.Content.Name,
+                Songs = albumSongs,
+                Singer = singer,
+                Image = resp.Content.Images.ExtraLarge
+            };
+            return View(new AlbumViewModel
+            {
+               Album= album
             });
         }
     }
