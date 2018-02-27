@@ -8,6 +8,10 @@ namespace MusicChart.Models
 {
     public class Image
     {
+        public Image()
+        {
+
+        }
         public Image(Uri source)
         {
             if(source != null)
