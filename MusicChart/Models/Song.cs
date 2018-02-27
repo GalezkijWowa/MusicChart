@@ -10,9 +10,8 @@ namespace MusicChart.Models
     {
         public string SongId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
         public string SingerId { get; set; }
-        public Singer Singer { get; set; }
         public Uri Image { get; set; }
+        public string AlbumId { get; set; }
     }
 }

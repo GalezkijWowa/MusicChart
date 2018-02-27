@@ -19,14 +19,25 @@ namespace MusicChart.Models
         public async Task<Album> GetAlbumInfoAsync(string singerName, string albumName)
         {
             LastResponse<LastAlbum> resp = await new AlbumApi(_lastAuth).GetAlbumInfoAsync(singerName, albumName);
-            LastFmAlbumRepository repo = new LastFmAlbumRepository();
-            ISingerRepository singerRepo = new LastFmSingerRepository();
+            List<Song> albumSongs = new List<Song>();
+            foreach (var song in resp.Content.Tracks)
+            {
+                albumSongs.Add(new Song
+                {
+                    SongId = song.Name,
+                    Name = song.Name,
+                    SingerId = song.ArtistName,
+                    AlbumId = song.AlbumName
+                }
+                );
+            }
             Album album = new Album
             {
+                AlbumId = resp.Content.Name,
                 Name = resp.Content.Name,
-                Songs = await repo.GetAlbumSongsAsync(singerName, albumName),
-                Singer = await singerRepo.GetSingerInfoAsync(singerName),
-                Image = resp.Content.Images.ExtraLarge
+                Songs = albumSongs,
+                Image = resp.Content.Images.ExtraLarge,
+                SingerId = singerName
             };
             return album;
         }
@@ -39,7 +50,11 @@ namespace MusicChart.Models
             {
                 albumSongs.Add(new Song
                 {
+                    SongId = song.Name,
                     Name = song.Name,
+                    Image = song.Images.ExtraLarge,
+                    SingerId = song.ArtistName,
+                    AlbumId = song.AlbumName
                 }
                 );
             }
@@ -52,12 +67,7 @@ namespace MusicChart.Models
             List<Album> albums = new List<Album>();
             foreach (var album in resp.Content)
             {
-                albums.Add(new Album
-                {
-                    Name = album.Name,
-                    Image = album.Images.ExtraLarge
-                }
-                );
+                albums.Add(await GetAlbumInfoAsync(singerName, album.Name));
             }
             return albums;
         }

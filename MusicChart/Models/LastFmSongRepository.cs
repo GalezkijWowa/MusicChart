@@ -24,8 +24,11 @@ namespace MusicChart.Models
             {
                 songs.Add(new Song
                 {
+                    SingerId = singerName,
                     Name = song.Name,
-                    Image = song.Images.ExtraLarge
+                    Image = song.Images.ExtraLarge,
+                    SongId = song.Name,
+                    AlbumId = song.AlbumName
                 }
                 );
             }

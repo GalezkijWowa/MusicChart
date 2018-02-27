@@ -11,9 +11,14 @@ namespace MusicChart.Models
     public class LastFmSingerRepository : ISingerRepository
     {
         private ILastAuth _lastAuth;
+        private IAlbumRepository _albumRepo;
+        private ISongRepository _songRepo;
+
         public LastFmSingerRepository()
         {
             _lastAuth = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
+            _songRepo = new LastFmSongRepository();
+            _albumRepo = new LastFmAlbumRepository();
         }
         public async Task<List<Singer>> GetSimiliarSingersAsync(string singerName)
         {
@@ -39,7 +44,10 @@ namespace MusicChart.Models
                 SingerId = singerResp.Content.Name,
                 Name = singerResp.Content.Name,
                 Photo = singerResp.Content.MainImage.ExtraLarge,
-                Description = singerResp.Content.Bio.Summary
+                Description = singerResp.Content.Bio.Summary,
+                //Songs = await _songRepo.GetTopSongsAsync(singerResp.Content.Name),
+                //Albums = await _albumRepo.GetSingerAlbumsAsync(singerResp.Content.Name),
+                //SimilarSingers = await GetSimiliarSingersAsync(singerResp.Content.Name)
             };
             return singer;
         }
@@ -48,23 +56,16 @@ namespace MusicChart.Models
         {
             PageResponse<LastArtist> _resp = await new ChartApi(_lastAuth).GetTopArtistsAsync(pageSize, PageInfo.PageSize);
             List<Singer> singers = new List<Singer>();
-            foreach (var artist in _resp.Content)
+            Singer topSinger;
+            foreach (var artist in _resp.Content.Skip((pageSize - 1) * PageInfo.PageSize).Take(PageInfo.PageSize).ToList())
             {
-                singers.Add(new Singer
-                {
-                    Name = artist.Name,
-                    Photo = artist.MainImage.ExtraLarge
-                }
-                );
-            }
-            return singers.Skip((pageSize - 1) * PageInfo.PageSize).Take(PageInfo.PageSize).ToList();
-        }
 
-        public async Task<int> TotalSingers()
-        {
-            PageResponse<LastArtist> _resp = await new ChartApi(_lastAuth).GetTopArtistsAsync();
-            //return _resp.Content.Count;
-            return 50;
+                topSinger = await GetSingerInfoAsync(artist.Name);
+                topSinger.IsTop = 1;
+
+                singers.Add(topSinger);
+            }
+            return singers;
         }
     }
 }

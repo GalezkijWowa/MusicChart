@@ -34,8 +34,7 @@ namespace MusicChart.Controllers
                 PageInfo = new PageInfo
                 {
                     CurrentPage = page,
-                    ItemsPerPage = PageInfo.PageSize,
-                    TotalItems = await _singerRepo.TotalSingers()
+                    ItemsPerPage = PageInfo.PageSize
                 }
             });
         }
@@ -52,9 +51,9 @@ namespace MusicChart.Controllers
         }
 
         public async Task<IActionResult> SingerAlbums(string id)
-        {       
+        {
             List<Album> albums = await _albumRepo.GetSingerAlbumsAsync(id);
-            Singer singer = await _singerRepo.GetSingerInfoAsync(id);          
+            Singer singer = await _singerRepo.GetSingerInfoAsync(id);
             return View(new SingerAlbumsViewModel
             {
                 Albums = albums,
@@ -85,7 +84,7 @@ namespace MusicChart.Controllers
             Album album = await _albumRepo.GetAlbumInfoAsync(id, albumName);
             return View(new AlbumViewModel
             {
-               Album= album
+                Album = album
             });
         }
     }

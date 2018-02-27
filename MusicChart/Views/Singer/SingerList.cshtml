@@ -14,7 +14,10 @@
                 <h2><span class="ion-minus"></span>Главное<span class="ion-minus"></span></h2>
                 <p>Мы отбираем новинки на основе публикаций о самых ожидаемых релизах 2018 года. 67 136 · 84 трека. Инди-зависимость. Лучшее новое инди каждый день! 1 869 · 50 треков. Саундтреки. Музыка из самых последних фильмов, сериалов, мультфильмов и видеоигр. </p><br>
                 <hr />
-                <div page-model="@Model.PageInfo" page-action="SingerList" type="button" class="btn btn-primary"></div>
+                <div page-model="@Model.PageInfo" page-action="SingerList"
+                     page-classes-enabled="true"
+                     page-class="btn" page-class-normal="btn-default"
+                     page-class-selected="btn-primary" class="btn-group"></div>
             </div>
             <a asp-controller="Singer" asp-action="ChangeSize" asp-route-size=10 type="button" class="btn btn-primary">10</a>
             <a asp-controller="Singer" asp-action="ChangeSize" asp-route-size=25 type="button" class="btn btn-primary">25</a>
@@ -40,7 +43,6 @@
                     <div style="margin:400px 0px;"></div>
                 </div>
             }
-        </div>        
+        </div>
     </div>
 </div>
-

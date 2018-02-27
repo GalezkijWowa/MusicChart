@@ -8,5 +8,6 @@ namespace MusicChart.Models.ViewModels
     public class SingerViewModel
     {
         public Singer Singer { get; set; }
+        public IEnumerable<Song> Songs { get; set; }
     }
 }

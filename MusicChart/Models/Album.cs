@@ -7,11 +7,10 @@ namespace MusicChart.Models
 {
     public class Album
     {
-        public string Id { get; set; }
+        public string AlbumId { get; set; }
         public string Name { get; set; }
         public IEnumerable<Song> Songs { get; set; }
         public string SingerId { get; set; }
         public Uri Image { get; set; }
-        public Singer Singer { get; set; }
     }
 }
