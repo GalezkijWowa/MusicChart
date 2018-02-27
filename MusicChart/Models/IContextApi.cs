@@ -14,5 +14,6 @@ namespace MusicChart.Models
         void AddSingers(Singer item);
         void AddSongs(Song item);
         void AddAlbums(Album item);
+        void AddSimiliarMap(SimiliarMap map);
     }
 }

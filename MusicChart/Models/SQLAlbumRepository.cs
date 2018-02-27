@@ -20,6 +20,11 @@ namespace MusicChart.Models
             return _context.Albums.FirstOrDefault(a => a.SingerId==singerName && a.Name == albumName);
         }
 
+        public async Task<List<Song>> GetAlbumSongsAsync(string singerName, string albumName)
+        {
+            return _context.Songs.Where(s => s.SingerId == singerName).ToList();
+        }
+
         public async Task<List<Album>> GetSingerAlbumsAsync(string singerName)
         {
             return _context.Albums.Where(a => a.SingerId == singerName).ToList();

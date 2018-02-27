@@ -16,7 +16,13 @@ namespace MusicChart.Models
         }
         public async Task<List<Singer>> GetSimiliarSingersAsync(string singerName)
         {
-            return _context.Singers.FirstOrDefault(s => s.Name == singerName).SimilarSingers;
+            List<SimiliarMap> simMaps = _context.SimiliarMaps.Where(map => map.SingerId == singerName).ToList();
+            List<Singer> singerList = new List<Singer>();
+            foreach(SimiliarMap map in simMaps)
+            {
+                singerList.Add(await GetSingerInfoAsync(map.SimiliarSingerId));
+            }
+            return singerList;
         }
 
         public async Task<Singer> GetSingerInfoAsync(string singerName)

@@ -9,5 +9,6 @@ namespace MusicChart.Models
     {
         Task<List<Album>> GetSingerAlbumsAsync(string singerName);
         Task<Album> GetAlbumInfoAsync(string singerName, string albumName);
+        Task<List<Song>> GetAlbumSongsAsync(string singerName, string albumName);
     }
 }

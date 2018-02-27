@@ -9,6 +9,7 @@ using IF.Lastfm.Core.Api;
 using IF.Lastfm.Core.Api.Helpers;
 using IF.Lastfm.Core.Objects;
 using AutoMapper;
+using MusicChart.Data;
 
 namespace MusicChart.Controllers
 {
@@ -18,11 +19,11 @@ namespace MusicChart.Controllers
         private ISongRepository _songRepo;
         private ISingerRepository _singerRepo;
 
-        public SingerController()
+        public SingerController(ApplicationDbContext dbContext)
         {
-            _singerRepo = new LastFmSingerRepository();
-            _songRepo = new LastFmSongRepository();
-            _albumRepo = new LastFmAlbumRepository();
+            _singerRepo = new LastFmSingerRepository(dbContext);
+            _songRepo = new LastFmSongRepository(dbContext);
+            _albumRepo = new LastFmAlbumRepository(dbContext);
         }
 
         public async Task<IActionResult> SingerList(int page = 1)
@@ -82,6 +83,7 @@ namespace MusicChart.Controllers
         public async Task<IActionResult> Album(string id, string albumName)
         {
             Album album = await _albumRepo.GetAlbumInfoAsync(id, albumName);
+            List<Song> songs = await _albumRepo.GetAlbumSongsAsync(id, album.Name);
             return View(new AlbumViewModel
             {
                 Album = album

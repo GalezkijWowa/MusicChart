@@ -20,7 +20,7 @@ namespace MusicChart.Models
             }
         }
         [Key]
-        public string ImageId { get; set; }       
+        public string ImageId { get; set; }
         public string Source { get; set; }
     }
 }

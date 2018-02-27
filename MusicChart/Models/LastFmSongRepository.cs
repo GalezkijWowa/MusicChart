@@ -1,6 +1,7 @@
 ﻿using IF.Lastfm.Core.Api;
 using IF.Lastfm.Core.Api.Helpers;
 using IF.Lastfm.Core.Objects;
+using MusicChart.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,8 +12,10 @@ namespace MusicChart.Models
     public class LastFmSongRepository : ISongRepository
     {
         private ILastAuth _lastAuth;
-        public LastFmSongRepository()
+        private IContextApi _contextApi;
+        public LastFmSongRepository(ApplicationDbContext dbContext)
         {
+            _contextApi = new SQLContextApi(dbContext);
             _lastAuth = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
         }
 
@@ -20,17 +23,17 @@ namespace MusicChart.Models
         {
             PageResponse<LastTrack> resp = await new ArtistApi(_lastAuth).GetTopTracksForArtistAsync(singerName);
             List<Song> songs = new List<Song>();
+            Song songToAdd;
             foreach (var song in resp.Content)
             {
-                songs.Add(new Song
+                songToAdd = new Song
                 {
                     SingerId = singerName,
                     Name = song.Name,
-                    Image = new Image (song.Images.ExtraLarge),
-                    SongId = song.Name,
-                    AlbumId = song.AlbumName
-                }
-                );
+                    SongId = song.Name
+                };
+                songs.Add(songToAdd);
+                _contextApi.AddSongs(songToAdd);
             }
             return songs;
         }

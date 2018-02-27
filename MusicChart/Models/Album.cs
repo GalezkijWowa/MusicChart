@@ -11,7 +11,6 @@ namespace MusicChart.Models
         [Key]
         public string AlbumId { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Song> Songs { get; set; }
         public string SingerId { get; set; }
         public Image Image { get; set; }
         public string ImageId { get; set; }

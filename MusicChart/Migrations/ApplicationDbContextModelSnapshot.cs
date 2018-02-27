@@ -50,6 +50,20 @@ namespace MusicChart.Migrations
                     b.ToTable("Images");
                 });
 
+            modelBuilder.Entity("MusicChart.Models.SimiliarMap", b =>
+                {
+                    b.Property<string>("SimiliarMapId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("SimiliarSingerId");
+
+                    b.Property<string>("SingerId");
+
+                    b.HasKey("SimiliarMapId");
+
+                    b.ToTable("SimiliarMaps");
+                });
+
             modelBuilder.Entity("MusicChart.Models.Singer", b =>
                 {
                     b.Property<string>("SingerId")
@@ -63,13 +77,9 @@ namespace MusicChart.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("SingerId1");
-
                     b.HasKey("SingerId");
 
                     b.HasIndex("ImageId");
-
-                    b.HasIndex("SingerId1");
 
                     b.ToTable("Singers");
                 });
@@ -79,19 +89,11 @@ namespace MusicChart.Migrations
                     b.Property<string>("SongId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("AlbumId");
-
-                    b.Property<string>("ImageId");
-
                     b.Property<string>("Name");
 
                     b.Property<string>("SingerId");
 
                     b.HasKey("SongId");
-
-                    b.HasIndex("AlbumId");
-
-                    b.HasIndex("ImageId");
 
                     b.ToTable("Songs");
                 });
@@ -106,21 +108,6 @@ namespace MusicChart.Migrations
             modelBuilder.Entity("MusicChart.Models.Singer", b =>
                 {
                     b.HasOne("MusicChart.Models.Image", "Photo")
-                        .WithMany()
-                        .HasForeignKey("ImageId");
-
-                    b.HasOne("MusicChart.Models.Singer")
-                        .WithMany("SimilarSingers")
-                        .HasForeignKey("SingerId1");
-                });
-
-            modelBuilder.Entity("MusicChart.Models.Song", b =>
-                {
-                    b.HasOne("MusicChart.Models.Album")
-                        .WithMany("Songs")
-                        .HasForeignKey("AlbumId");
-
-                    b.HasOne("MusicChart.Models.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
                 });

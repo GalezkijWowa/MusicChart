@@ -17,32 +17,65 @@ namespace MusicChart.Models
 
         public void AddAlbums(IEnumerable<Album> items)
         {
-            _context.Albums.AddRange(items);
-        }
-
-        public void AddAlbums(Album item)
-        {
-            _context.Albums.Add(item);
+            foreach (var item in items)
+            {
+                AddAlbums(item);
+            }
+            _context.SaveChanges();
         }
 
         public void AddSingers(IEnumerable<Singer> items)
         {
-            _context.Singers.AddRange(items);
+            foreach (var item in items)
+            {
+                AddSingers(item);
+            }
+            _context.SaveChanges();
         }
 
         public void AddSongs(IEnumerable<Song> items)
         {
-            _context.Songs.AddRange(items);
+            foreach (var item in items)
+            {
+                AddSongs(item);
+            }
+            _context.SaveChanges();
+        }
+
+        public void AddAlbums(Album item)
+        {
+            if (_context.Albums.Find(item.AlbumId) == null)
+            {
+                _context.Albums.Add(item);
+            }
+            _context.SaveChanges();
         }
 
         public void AddSingers(Singer item)
         {
-            _context.Singers.Add(item);
+            if (_context.Singers.Find(item.SingerId) == null)
+            {
+                _context.Singers.Add(item);
+            }
+            _context.SaveChanges();
         }
 
         public void AddSongs(Song item)
         {
-            _context.Songs.Add(item);
+            if (_context.Songs.Find(item.SongId) == null)
+            {
+                _context.Songs.Add(item);
+            }
+            _context.SaveChanges();
+        }
+
+        public void AddSimiliarMap(SimiliarMap map)
+        {
+            if (_context.SimiliarMaps.Where(m => m.SingerId == map.SingerId && m.SimiliarSingerId == map.SimiliarSingerId).ToList().Count() == 0)
+            {
+                _context.SimiliarMaps.Add(map);
+            }
+            _context.SaveChanges();
         }
     }
 }

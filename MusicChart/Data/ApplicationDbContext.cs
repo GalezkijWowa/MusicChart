@@ -17,6 +17,7 @@ namespace MusicChart.Data
         public DbSet<Song> Songs { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<SimiliarMap> SimiliarMaps { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
