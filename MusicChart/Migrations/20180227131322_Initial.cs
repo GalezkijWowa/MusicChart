@@ -38,6 +38,7 @@ namespace MusicChart.Migrations
                 columns: table => new
                 {
                     SongId = table.Column<string>(nullable: false),
+                    AlbumName = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     SingerId = table.Column<string>(nullable: true)
                 },

@@ -15,12 +15,20 @@ namespace MusicChart.Controllers
 {
     public class SingerController : Controller
     {
+        private ISingerRepository _dbSingerRepo;
+        private ISongRepository _dbSongRepo;
+        private IAlbumRepository _dbAlbumRepo;
+
         private IAlbumRepository _albumRepo;
         private ISongRepository _songRepo;
         private ISingerRepository _singerRepo;
 
         public SingerController(ApplicationDbContext dbContext)
         {
+            _dbSingerRepo = new SQLSingerRepository(dbContext);
+            _dbSongRepo = new SQLSongRepository(dbContext);
+            _dbAlbumRepo = new SQLAlbumRepository(dbContext);
+
             _singerRepo = new LastFmSingerRepository(dbContext);
             _songRepo = new LastFmSongRepository(dbContext);
             _albumRepo = new LastFmAlbumRepository(dbContext);
@@ -86,7 +94,8 @@ namespace MusicChart.Controllers
             List<Song> songs = await _albumRepo.GetAlbumSongsAsync(id, album.Name);
             return View(new AlbumViewModel
             {
-                Album = album
+                Album = album,
+                Songs = songs
             });
         }
     }

@@ -89,6 +89,8 @@ namespace MusicChart.Migrations
                     b.Property<string>("SongId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AlbumName");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("SingerId");

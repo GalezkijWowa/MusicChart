@@ -11,7 +11,7 @@ using System;
 namespace MusicChart.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180227130227_Initial")]
+    [Migration("20180227131322_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,6 +89,8 @@ namespace MusicChart.Migrations
                 {
                     b.Property<string>("SongId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AlbumName");
 
                     b.Property<string>("Name");
 

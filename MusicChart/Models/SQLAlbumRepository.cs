@@ -22,7 +22,7 @@ namespace MusicChart.Models
 
         public async Task<List<Song>> GetAlbumSongsAsync(string singerName, string albumName)
         {
-            return _context.Songs.Where(s => s.SingerId == singerName).ToList();
+            return _context.Songs.Where(s => s.SingerId == singerName && s.AlbumName == albumName).ToList();
         }
 
         public async Task<List<Album>> GetSingerAlbumsAsync(string singerName)
