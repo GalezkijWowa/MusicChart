@@ -19,7 +19,7 @@
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" data-aos="fade-right">
                     <div class="col-lg-4 col-xs-12">
                         <a asp-controller="Singer" asp-action="Album" asp-route-id=@Model.Singer.Name asp-route-albumName=@album.Name>
-                            <div id="curve" class="card" style="background-image:url(@album.Image);">
+                            <div id="curve" class="card" style="background-image:url(@album.Image.Source);">
                                 <div class="footer">
                                     <div class="info">
                                         <div class="name">@album.Name</div>

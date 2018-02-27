@@ -34,9 +34,12 @@ namespace MusicChart.Models
             Album album = new Album
             {
                 AlbumId = resp.Content.Name,
-                Name = resp.Content.Name,
+                Name = "" + resp.Content.Name,
                 Songs = albumSongs,
-                Image = resp.Content.Images.ExtraLarge,
+                Image = new Image
+                (
+                    resp.Content.Images.ExtraLarge
+                ),
                 SingerId = singerName
             };
             return album;
@@ -52,7 +55,7 @@ namespace MusicChart.Models
                 {
                     SongId = song.Name,
                     Name = song.Name,
-                    Image = song.Images.ExtraLarge,
+                    Image = new Image(song.Images.ExtraLarge),
                     SingerId = song.ArtistName,
                     AlbumId = song.AlbumName
                 }

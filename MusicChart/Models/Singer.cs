@@ -12,8 +12,9 @@ namespace MusicChart.Models
         public string SingerId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Uri Photo { get; set; }
+        public Image Photo { get; set; }
         public List<Singer> SimilarSingers { get; set; }
         public int IsTop { get; set; } = 0; // 1- true, 0 - false
+        public string ImageId { get; set; }
     }
 }

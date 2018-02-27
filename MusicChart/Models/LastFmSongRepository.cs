@@ -26,7 +26,7 @@ namespace MusicChart.Models
                 {
                     SingerId = singerName,
                     Name = song.Name,
-                    Image = song.Images.ExtraLarge,
+                    Image = new Image (song.Images.ExtraLarge),
                     SongId = song.Name,
                     AlbumId = song.AlbumName
                 }

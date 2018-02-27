@@ -29,7 +29,7 @@ namespace MusicChart.Models
                 singers.Add(new Singer
                 {
                     Name = artist.Name,
-                    Photo = artist.MainImage.ExtraLarge
+                    Photo = new Image ( artist.MainImage.ExtraLarge )
                 }
                 );
             }
@@ -43,11 +43,8 @@ namespace MusicChart.Models
             {
                 SingerId = singerResp.Content.Name,
                 Name = singerResp.Content.Name,
-                Photo = singerResp.Content.MainImage.ExtraLarge,
+                Photo = new Image (singerResp.Content.MainImage.ExtraLarge ),
                 Description = singerResp.Content.Bio.Summary,
-                //Songs = await _songRepo.GetTopSongsAsync(singerResp.Content.Name),
-                //Albums = await _albumRepo.GetSingerAlbumsAsync(singerResp.Content.Name),
-                //SimilarSingers = await GetSimiliarSingersAsync(singerResp.Content.Name)
             };
             return singer;
         }
