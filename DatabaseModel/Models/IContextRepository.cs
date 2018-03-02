@@ -17,6 +17,7 @@ namespace DatabaseModel.Models
         void AddSong(Song item);
         void AddAlbum(Album item);
         void AddSimiliarMap(SimiliarMap map);
+        void AddSimiliarMaps(List<SimiliarMap> maps);
 
         void UpdateSingers(Singer item);
         void UpdateSongs(Song item);

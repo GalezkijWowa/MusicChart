@@ -19,19 +19,25 @@ namespace BuisnessModel.Models
             _lastAlbumRepo = new LastFmAlbumRepository();
         }
 
-        public Task<Album> GetAlbumInfoAsync(string singerName, string albumName)
+        public async Task<Album> GetAlbumInfoAsync(string singerName, string albumName)
         {
-            return _lastAlbumRepo.GetAlbumInfoAsync(singerName, albumName);
+            Album album = await _lastAlbumRepo.GetAlbumInfoAsync(singerName, albumName);
+            _dbRepo.AddAlbum(album);
+            return album;
         }
 
-        public Task<List<Song>> GetAlbumSongsAsync(string singerName, string albumName)
+        public async Task<List<Song>> GetAlbumSongsAsync(string singerName, string albumName)
         {
-            return _lastAlbumRepo.GetAlbumSongsAsync(singerName, albumName);
+            List<Song> songs = await _lastAlbumRepo.GetAlbumSongsAsync(singerName, albumName);
+            _dbRepo.AddSongs(songs);
+            return songs;
         }
 
-        public Task<List<Album>> GetSingerAlbumsAsync(string singerName)
+        public async Task<List<Album>> GetSingerAlbumsAsync(string singerName)
         {
-            return _lastAlbumRepo.GetSingerAlbumsAsync(singerName);
+            List<Album> albums = await _lastAlbumRepo.GetSingerAlbumsAsync(singerName);
+            _dbRepo.AddAlbums(albums);
+            return albums;
         }
     }
 }

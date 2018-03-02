@@ -18,9 +18,11 @@ namespace BuisnessModel.Models
             _dbRepo = new SQLContextRepository(dbContext);
             _lastSongRepo = new LastFmSongRepository();
         }
-        public Task<List<Song>> GetTopSongsAsync(string singerName)
+        public async Task<List<Song>> GetTopSongsAsync(string singerName)
         {
-            return _lastSongRepo.GetTopSongsAsync(singerName);
+            List<Song> songs = await _lastSongRepo.GetTopSongsAsync(singerName);
+            _dbRepo.AddSongs(songs);
+            return songs;
         }
     }
 }

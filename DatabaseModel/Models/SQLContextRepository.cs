@@ -31,6 +31,10 @@ namespace DatabaseModel.Models
             {
                 _context.Albums.Add(item);
             }
+            else
+            {
+                _context.Albums.Update(item);
+            }
             _context.SaveChanges();
         }
 
@@ -58,6 +62,10 @@ namespace DatabaseModel.Models
             {
                 _context.Singers.Add(item);
             }
+            else
+            {
+                _context.Singers.Update(item);
+            }
             _context.SaveChanges();
         }
 
@@ -75,6 +83,10 @@ namespace DatabaseModel.Models
             if (_context.Songs.Find(item.SongId) == null)
             {
                 _context.Songs.Add(item);
+            }
+            else
+            {
+                _context.Songs.Update(item);
             }
             _context.SaveChanges();
         }
@@ -143,6 +155,11 @@ namespace DatabaseModel.Models
         public void UpdateSongs(Song item)
         {
             _context.Entry(item).State = EntityState.Modified;
+        }
+
+        public void AddSimiliarMaps(List<SimiliarMap> maps)
+        {
+            throw new NotImplementedException();
         }
     }
 }

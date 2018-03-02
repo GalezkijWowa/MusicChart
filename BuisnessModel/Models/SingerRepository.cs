@@ -18,14 +18,18 @@ namespace BuisnessModel.Models
             _dbRepo = new SQLContextRepository(dbContext);
             _lastSingerRepo = new LastFmSingerRepository();
         }
-        public Task<Singer> GetFullSingerInfoAsync(string singerName)
+        public async Task<Singer> GetFullSingerInfoAsync(string singerName)
         {
-            return _lastSingerRepo.GetFullSingerInfoAsync(singerName);
+            Singer singer = await _lastSingerRepo.GetFullSingerInfoAsync(singerName);
+            _dbRepo.AddSinger(singer);
+            return singer;
         }
 
-        public Task<List<Singer>> GetSimiliarSingersAsync(string singerName)
+        public async Task<List<Singer>> GetSimiliarSingersAsync(string singerName)
         {
-            return _lastSingerRepo.GetSimiliarSingersAsync(singerName);
+            List<Singer> singers = await _lastSingerRepo.GetSimiliarSingersAsync(singerName);
+            _dbRepo.AddSingers(singers);
+            return singers;
         }
 
         public Task<string> GetSingerDescription(string singerName)
@@ -33,14 +37,22 @@ namespace BuisnessModel.Models
             return _lastSingerRepo.GetSingerDescription(singerName);
         }
 
-        public Task<Singer> GetSingerInfoAsync(string singerName)
+        public async Task<Singer> GetSingerInfoAsync(string singerName)
         {
-            return _lastSingerRepo.GetSingerInfoAsync(singerName);
+            Singer singer = await _lastSingerRepo.GetSingerInfoAsync(singerName);
+            return singer;
         }
 
-        public Task<List<Singer>> GetSingersAsync(int pageSize = 1, int itemsPerPage = 20)
+        public async Task<List<Singer>> GetSingersAsync(int pageSize = 1, int itemsPerPage = 20)
         {
-            return _lastSingerRepo.GetSingersAsync(pageSize, itemsPerPage);
+            List<Singer> singers;
+            singers = await _dbRepo.GetSingersAsync(pageSize, itemsPerPage);
+            if(singers.Count == 0)
+            {
+                singers = await _lastSingerRepo.GetSingersAsync(pageSize, itemsPerPage);
+                _dbRepo.AddSingers(singers);
+            }
+            return singers;
         }
     }
 }
