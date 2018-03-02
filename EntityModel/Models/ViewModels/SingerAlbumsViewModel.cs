@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BuisnessModel.Models.ViewModels
+namespace EntityModel.Models.ViewModels
 {
-    public class SingerViewModel
+    public class SingerAlbumsViewModel
     {
         public Singer Singer { get; set; }
-        public IEnumerable<Song> Songs { get; set; }
+        public IEnumerable<Album> Albums { get; set; }
     }
 }

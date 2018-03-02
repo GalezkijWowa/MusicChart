@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BuisnessModel.Models;
-using BuisnessModel.Models.ViewModels;
+using EntityModel.Models.ViewModels;
 using DatabaseModel.Data;
+using EntityModel.Models;
 
 namespace MusicChart.Controllers
 {
@@ -17,9 +18,9 @@ namespace MusicChart.Controllers
 
         public SingerController(ApplicationDbContext dbContext)
         {
-            _singerRepo = new LastFmSingerRepository();
-            _songRepo = new LastFmSongRepository();
-            _albumRepo = new LastFmAlbumRepository();
+            _singerRepo = new SingerRepository(dbContext);
+            _songRepo = new SongRepository(dbContext);
+            _albumRepo = new AlbumRepository(dbContext);
         }
 
         public async Task<IActionResult> SingerList(int page = 1)

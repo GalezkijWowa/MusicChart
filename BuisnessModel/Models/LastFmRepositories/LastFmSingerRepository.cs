@@ -1,4 +1,5 @@
-﻿using IF.Lastfm.Core.Api;
+﻿using EntityModel.Models;
+using IF.Lastfm.Core.Api;
 using IF.Lastfm.Core.Api.Helpers;
 using IF.Lastfm.Core.Objects;
 using System;
@@ -27,7 +28,7 @@ namespace BuisnessModel.Models
                 {
                     SingerId = artist.Name,
                     Name = artist.Name,
-                    //Photo = new Image ( artist.MainImage.ExtraLarge ),
+                    Photo = new Image ( artist.MainImage.ExtraLarge ),
                 }
                 );
             }

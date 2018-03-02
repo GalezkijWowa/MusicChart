@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BuisnessModel\BuisnessModel.csproj" />
     <ProjectReference Include="..\DatabaseModel\DatabaseModel.csproj" />
+    <ProjectReference Include="..\EntityModel\EntityModel.csproj" />
   </ItemGroup>
 
 </Project>

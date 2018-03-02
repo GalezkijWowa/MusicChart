@@ -4,19 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BuisnessModel.Models
+namespace EntityModel.Models
 {
-    public class Singer
+    public class Album
     {
         [Key]
-        public string SingerId { get; set; }
+        public string AlbumId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public Image Photo { get; set; }
-        public int IsTop { get; set; } = 0; // 1- true, 0 - false
+        public string SingerId { get; set; }
+        public Image Image { get; set; }
         public string ImageId { get; set; }
 
         public List<Song> Songs { get; set; }
-        public List<Album> Albums { get; set; }
     }
 }
