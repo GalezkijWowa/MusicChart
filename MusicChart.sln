@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{EB54C0F4-0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MusicChart.Tests", "MusicChart.Tests\MusicChart.Tests.csproj", "{207FB91D-43B6-4233-8E77-37D8A47B3D8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseModel", "DatabaseModel\DatabaseModel.csproj", "{80C99B96-BCE6-4575-8B10-93A069162597}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseModel", "DatabaseModel\DatabaseModel.csproj", "{80C99B96-BCE6-4575-8B10-93A069162597}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

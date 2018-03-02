@@ -28,17 +28,8 @@ namespace MusicChart
             using (SqlConnection connection = new SqlConnection())
             {
                 services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connection, b => b.MigrationsAssembly("DatabaseModel")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("DatabaseModel")));
             }
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            //services.AddTransient<ILastAuth, LastAuth>(options =>
-            //    options.apikey = Configuration.GetValue["LastFmInfo:apikey"];
-            //    options.secret = Configuration["LastFmInfo:apisecret"];
-            //    );
-            //services.AddTransient<ISingerRepository, FakeSingerRepository>();
-            //services.AddTransient<ISongRepository, FakeSongRepository>();
             services.AddAutoMapper();
             services.AddMvc();
         }

@@ -23,10 +23,10 @@ namespace BuisnessModel.Models
             {
                 AlbumId = resp.Content.Name,
                 Name = resp.Content.Name,
-                Image = new Image
-                (
-                    resp.Content.Images.ExtraLarge
-                ),
+                //Image = new Image
+                //(
+                //    resp.Content.Images.ExtraLarge
+                //),
                 SingerId = singerName
             };
             return album;

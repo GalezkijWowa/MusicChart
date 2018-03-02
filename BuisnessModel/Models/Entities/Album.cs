@@ -14,5 +14,7 @@ namespace BuisnessModel.Models
         public string SingerId { get; set; }
         public Image Image { get; set; }
         public string ImageId { get; set; }
+
+        public List<Song> Songs { get; set; }
     }
 }

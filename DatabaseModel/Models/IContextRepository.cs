@@ -11,9 +11,13 @@ namespace DatabaseModel.Models
         void AddSongs(IEnumerable<Song> items);
         void AddAlbums(IEnumerable<Album> items);
 
-        void AddSingers(Singer item);
-        void AddSongs(Song item);
-        void AddAlbums(Album item);
+        void AddSinger(Singer item);
+        void AddSong(Song item);
+        void AddAlbum(Album item);
         void AddSimiliarMap(SimiliarMap map);
+
+        void UpdateSingers(Singer item);
+        void UpdateSongs(Song item);
+        void UpdateAlbums(Album item);
     }
 }

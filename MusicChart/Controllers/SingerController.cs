@@ -39,7 +39,7 @@ namespace MusicChart.Controllers
         public async Task<IActionResult> Singer(string id)
         {
             List<Song> songs = await _songRepo.GetTopSongsAsync(id);
-            Singer singer = await _singerRepo.GetSingerInfoAsync(id);
+            Singer singer = await _singerRepo.GetFullSingerInfoAsync(id);
             return View(new SingerSongsViewModel
             {
                 Singer = singer,

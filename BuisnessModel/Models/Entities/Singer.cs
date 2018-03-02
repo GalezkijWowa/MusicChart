@@ -15,5 +15,8 @@ namespace BuisnessModel.Models
         public Image Photo { get; set; }
         public int IsTop { get; set; } = 0; // 1- true, 0 - false
         public string ImageId { get; set; }
+
+        public List<Song> Songs { get; set; }
+        public List<Album> Albums { get; set; }
     }
 }
