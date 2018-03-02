@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MusicChart.Models;
-using MusicChart.Models.ViewModels;
-using IF.Lastfm.Core.Api;
-using IF.Lastfm.Core.Api.Helpers;
-using IF.Lastfm.Core.Objects;
-using AutoMapper;
-using MusicChart.Data;
+using BuisnessModel.Models;
+using BuisnessModel.Models.ViewModels;
+using DatabaseModel.Data;
 
 namespace MusicChart.Controllers
 {
@@ -21,9 +17,9 @@ namespace MusicChart.Controllers
 
         public SingerController(ApplicationDbContext dbContext)
         {
-            _singerRepo = new LastFmSingerRepository(dbContext);
-            _songRepo = new LastFmSongRepository(dbContext);
-            _albumRepo = new LastFmAlbumRepository(dbContext);
+            _singerRepo = new LastFmSingerRepository();
+            _songRepo = new LastFmSongRepository();
+            _albumRepo = new LastFmAlbumRepository();
         }
 
         public async Task<IActionResult> SingerList(int page = 1)
