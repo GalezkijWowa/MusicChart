@@ -35,8 +35,6 @@ namespace DatabaseModel.Migrations
 
                     b.HasIndex("ImageId");
 
-                    b.HasIndex("SingerId");
-
                     b.ToTable("Albums");
                 });
 
@@ -79,6 +77,8 @@ namespace DatabaseModel.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("Path");
+
                     b.HasKey("SingerId");
 
                     b.HasIndex("ImageId");
@@ -99,8 +99,6 @@ namespace DatabaseModel.Migrations
 
                     b.HasKey("SongId");
 
-                    b.HasIndex("SingerId");
-
                     b.ToTable("Songs");
                 });
 
@@ -109,10 +107,6 @@ namespace DatabaseModel.Migrations
                     b.HasOne("EntityModel.Models.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
-
-                    b.HasOne("EntityModel.Models.Singer")
-                        .WithMany("Albums")
-                        .HasForeignKey("SingerId");
                 });
 
             modelBuilder.Entity("EntityModel.Models.Singer", b =>
@@ -120,13 +114,6 @@ namespace DatabaseModel.Migrations
                     b.HasOne("EntityModel.Models.Image", "Photo")
                         .WithMany()
                         .HasForeignKey("ImageId");
-                });
-
-            modelBuilder.Entity("EntityModel.Models.Song", b =>
-                {
-                    b.HasOne("EntityModel.Models.Singer")
-                        .WithMany("Songs")
-                        .HasForeignKey("SingerId");
                 });
 #pragma warning restore 612, 618
         }

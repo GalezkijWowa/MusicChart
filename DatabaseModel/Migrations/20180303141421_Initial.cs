@@ -34,24 +34,17 @@ namespace DatabaseModel.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Singers",
+                name: "Songs",
                 columns: table => new
                 {
-                    SingerId = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    ImageId = table.Column<string>(nullable: true),
-                    IsTop = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    SongId = table.Column<string>(nullable: false),
+                    AlbumName = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    SingerId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Singers", x => x.SingerId);
-                    table.ForeignKey(
-                        name: "FK_Singers_Images_ImageId",
-                        column: x => x.ImageId,
-                        principalTable: "Images",
-                        principalColumn: "ImageId",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Songs", x => x.SongId);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,31 +65,27 @@ namespace DatabaseModel.Migrations
                         principalTable: "Images",
                         principalColumn: "ImageId",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Albums_Singers_SingerId",
-                        column: x => x.SingerId,
-                        principalTable: "Singers",
-                        principalColumn: "SingerId",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Songs",
+                name: "Singers",
                 columns: table => new
                 {
-                    SongId = table.Column<string>(nullable: false),
-                    AlbumName = table.Column<string>(nullable: true),
+                    SingerId = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    ImageId = table.Column<string>(nullable: true),
+                    IsTop = table.Column<int>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    SingerId = table.Column<string>(nullable: true)
+                    Path = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Songs", x => x.SongId);
+                    table.PrimaryKey("PK_Singers", x => x.SingerId);
                     table.ForeignKey(
-                        name: "FK_Songs_Singers_SingerId",
-                        column: x => x.SingerId,
-                        principalTable: "Singers",
-                        principalColumn: "SingerId",
+                        name: "FK_Singers_Images_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "Images",
+                        principalColumn: "ImageId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -106,19 +95,9 @@ namespace DatabaseModel.Migrations
                 column: "ImageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Albums_SingerId",
-                table: "Albums",
-                column: "SingerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Singers_ImageId",
                 table: "Singers",
                 column: "ImageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Songs_SingerId",
-                table: "Songs",
-                column: "SingerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -130,10 +109,10 @@ namespace DatabaseModel.Migrations
                 name: "SimiliarMaps");
 
             migrationBuilder.DropTable(
-                name: "Songs");
+                name: "Singers");
 
             migrationBuilder.DropTable(
-                name: "Singers");
+                name: "Songs");
 
             migrationBuilder.DropTable(
                 name: "Images");
