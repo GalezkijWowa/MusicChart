@@ -43,14 +43,14 @@ namespace BuisnessModel.Models
                 {
                     SongId = song.Name,
                     Name = song.Name,
-                    SingerId = song.ArtistName
+                    SingerId = song.ArtistName,
+                    AlbumName = albumName
                 };
                 albumSongs.Add(songToAdd);
 
             }
             return albumSongs;
         }
-
 
         public async Task<List<Album>> GetSingerAlbumsAsync(string singerName)
         {

@@ -11,6 +11,6 @@ namespace EntityModel.Models
         [Key]
         public string SimiliarMapId { get; set; }
         public string SingerId { get; set; }
-        public string SimiliarSingerId { get; internal set; }
+        public string SimiliarSingerId { get; set; }
     }
 }

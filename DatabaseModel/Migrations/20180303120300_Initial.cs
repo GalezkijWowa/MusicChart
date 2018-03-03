@@ -85,7 +85,6 @@ namespace DatabaseModel.Migrations
                 columns: table => new
                 {
                     SongId = table.Column<string>(nullable: false),
-                    AlbumId = table.Column<string>(nullable: true),
                     AlbumName = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     SingerId = table.Column<string>(nullable: true)
@@ -93,12 +92,6 @@ namespace DatabaseModel.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Songs", x => x.SongId);
-                    table.ForeignKey(
-                        name: "FK_Songs_Albums_AlbumId",
-                        column: x => x.AlbumId,
-                        principalTable: "Albums",
-                        principalColumn: "AlbumId",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Songs_Singers_SingerId",
                         column: x => x.SingerId,
@@ -123,11 +116,6 @@ namespace DatabaseModel.Migrations
                 column: "ImageId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Songs_AlbumId",
-                table: "Songs",
-                column: "AlbumId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Songs_SingerId",
                 table: "Songs",
                 column: "SingerId");
@@ -136,13 +124,13 @@ namespace DatabaseModel.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Albums");
+
+            migrationBuilder.DropTable(
                 name: "SimiliarMaps");
 
             migrationBuilder.DropTable(
                 name: "Songs");
-
-            migrationBuilder.DropTable(
-                name: "Albums");
 
             migrationBuilder.DropTable(
                 name: "Singers");

@@ -16,12 +16,8 @@ namespace DatabaseModel.Models
         void AddSinger(Singer item);
         void AddSong(Song item);
         void AddAlbum(Album item);
-        void AddSimiliarMap(SimiliarMap map);
-        void AddSimiliarMaps(List<SimiliarMap> maps);
-
-        void UpdateSingers(Singer item);
-        void UpdateSongs(Song item);
-        void UpdateAlbums(Album item);
+        void AddSimiliarMap(string simName, string singerName);
+        void AddSimiliarMaps(List<Singer> simList, string singerName);
 
         Task<List<Singer>> GetSingersAsync(int pageSize = 1, int itemsPerPage = 20);
         Task<List<Singer>> GetSimiliarSingersAsync(string singerName);

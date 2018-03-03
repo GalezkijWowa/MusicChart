@@ -20,7 +20,7 @@ namespace DatabaseModel.Migrations
                 .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BuisnessModel.Models.Album", b =>
+            modelBuilder.Entity("EntityModel.Models.Album", b =>
                 {
                     b.Property<string>("AlbumId")
                         .ValueGeneratedOnAdd();
@@ -40,7 +40,7 @@ namespace DatabaseModel.Migrations
                     b.ToTable("Albums");
                 });
 
-            modelBuilder.Entity("BuisnessModel.Models.Image", b =>
+            modelBuilder.Entity("EntityModel.Models.Image", b =>
                 {
                     b.Property<string>("ImageId")
                         .ValueGeneratedOnAdd();
@@ -52,7 +52,7 @@ namespace DatabaseModel.Migrations
                     b.ToTable("Images");
                 });
 
-            modelBuilder.Entity("BuisnessModel.Models.SimiliarMap", b =>
+            modelBuilder.Entity("EntityModel.Models.SimiliarMap", b =>
                 {
                     b.Property<string>("SimiliarMapId")
                         .ValueGeneratedOnAdd();
@@ -66,7 +66,7 @@ namespace DatabaseModel.Migrations
                     b.ToTable("SimiliarMaps");
                 });
 
-            modelBuilder.Entity("BuisnessModel.Models.Singer", b =>
+            modelBuilder.Entity("EntityModel.Models.Singer", b =>
                 {
                     b.Property<string>("SingerId")
                         .ValueGeneratedOnAdd();
@@ -86,12 +86,10 @@ namespace DatabaseModel.Migrations
                     b.ToTable("Singers");
                 });
 
-            modelBuilder.Entity("BuisnessModel.Models.Song", b =>
+            modelBuilder.Entity("EntityModel.Models.Song", b =>
                 {
                     b.Property<string>("SongId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AlbumId");
 
                     b.Property<string>("AlbumName");
 
@@ -101,38 +99,32 @@ namespace DatabaseModel.Migrations
 
                     b.HasKey("SongId");
 
-                    b.HasIndex("AlbumId");
-
                     b.HasIndex("SingerId");
 
                     b.ToTable("Songs");
                 });
 
-            modelBuilder.Entity("BuisnessModel.Models.Album", b =>
+            modelBuilder.Entity("EntityModel.Models.Album", b =>
                 {
-                    b.HasOne("BuisnessModel.Models.Image", "Image")
+                    b.HasOne("EntityModel.Models.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
 
-                    b.HasOne("BuisnessModel.Models.Singer")
+                    b.HasOne("EntityModel.Models.Singer")
                         .WithMany("Albums")
                         .HasForeignKey("SingerId");
                 });
 
-            modelBuilder.Entity("BuisnessModel.Models.Singer", b =>
+            modelBuilder.Entity("EntityModel.Models.Singer", b =>
                 {
-                    b.HasOne("BuisnessModel.Models.Image", "Photo")
+                    b.HasOne("EntityModel.Models.Image", "Photo")
                         .WithMany()
                         .HasForeignKey("ImageId");
                 });
 
-            modelBuilder.Entity("BuisnessModel.Models.Song", b =>
+            modelBuilder.Entity("EntityModel.Models.Song", b =>
                 {
-                    b.HasOne("BuisnessModel.Models.Album")
-                        .WithMany("Songs")
-                        .HasForeignKey("AlbumId");
-
-                    b.HasOne("BuisnessModel.Models.Singer")
+                    b.HasOne("EntityModel.Models.Singer")
                         .WithMany("Songs")
                         .HasForeignKey("SingerId");
                 });

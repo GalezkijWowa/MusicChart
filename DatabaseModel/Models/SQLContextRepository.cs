@@ -27,19 +27,21 @@ namespace DatabaseModel.Models
 
         public void AddAlbum(Album item)
         {
-            if (_context.Albums.Find(item.AlbumId) == null)
+            Album albumFromDb = _context.Albums.Find(item.AlbumId);
+            if (albumFromDb == null)
             {
                 _context.Albums.Add(item);
-            }
-            else
-            {
-                _context.Albums.Update(item);
             }
             _context.SaveChanges();
         }
 
-        public void AddSimiliarMap(SimiliarMap map)
+        public void AddSimiliarMap(string simName, string singerName)
         {
+            SimiliarMap map = new SimiliarMap
+            {
+                SimiliarSingerId = simName,
+                SingerId = singerName
+            };
             if (_context.SimiliarMaps.Where(m => m.SingerId == map.SingerId && m.SimiliarSingerId == map.SimiliarSingerId).ToList().Count() == 0)
             {
                 _context.SimiliarMaps.Add(map);
@@ -58,13 +60,15 @@ namespace DatabaseModel.Models
 
         public void AddSinger(Singer item)
         {
-            if (_context.Singers.Find(item.SingerId) == null)
+            Singer singerFromDb = _context.Singers.Find(item.SingerId);
+            if (singerFromDb == null)
             {
                 _context.Singers.Add(item);
             }
             else
             {
-                _context.Singers.Update(item);
+                singerFromDb.Description = item.Description;
+                _context.Singers.Update(singerFromDb);
             }
             _context.SaveChanges();
         }
@@ -80,16 +84,30 @@ namespace DatabaseModel.Models
 
         public void AddSong(Song item)
         {
-            if (_context.Songs.Find(item.SongId) == null)
+            Song songFromDb = _context.Songs.Find(item.SongId);
+            if (songFromDb == null)
             {
                 _context.Songs.Add(item);
             }
             else
             {
-                _context.Songs.Update(item);
+                songFromDb.AlbumName = item.AlbumName;
+                _context.Entry(songFromDb).State = EntityState.Modified;
+                _context.Songs.Update(songFromDb);
             }
             _context.SaveChanges();
         }
+
+        private Image GetSingerPhoto(string singerName)
+        {
+            return _context.Images.FirstOrDefault(p => p.ImageId == _context.Singers.FirstOrDefault(s => s.Name == singerName).ImageId);
+        }
+
+        private Image GetAlbumImage(string albumName)
+        {
+            return _context.Images.FirstOrDefault(p => p.ImageId == _context.Albums.FirstOrDefault(a => a.Name == albumName).ImageId);
+        }
+        
 
         public async Task<Album> GetAlbumInfoAsync(string singerName, string albumName)
         {
@@ -101,9 +119,11 @@ namespace DatabaseModel.Models
             return _context.Songs.Where(s => s.SingerId == singerName && s.AlbumName == albumName).ToList();
         }
 
-        public Task<Singer> GetFullSingerInfoAsync(string singerName)
+        public async Task<Singer> GetFullSingerInfoAsync(string singerName)
         {
-            throw new NotImplementedException();
+            Singer singer = await GetSingerInfoAsync(singerName);
+            singer.Description = await GetSingerDescription(singerName);
+            return singer;
         }
 
         public async Task<List<Singer>> GetSimiliarSingersAsync(string singerName)
@@ -119,22 +139,28 @@ namespace DatabaseModel.Models
 
         public async Task<List<Album>> GetSingerAlbumsAsync(string singerName)
         {
-            return _context.Albums.Where(a => a.SingerId == singerName).ToList();
+            List<Album> albums = _context.Albums.Where(a => a.SingerId == singerName).ToList();
+            albums.ForEach(a => a.Image = GetAlbumImage(a.Name));
+            return albums;
         }
 
-        public Task<string> GetSingerDescription(string singerName)
+        public async Task<string> GetSingerDescription(string singerName)
         {
-            throw new NotImplementedException();
+            return _context.Singers.FirstOrDefault(s => s.Name == singerName).Description;
         }
 
         public async Task<Singer> GetSingerInfoAsync(string singerName)
         {
-            return _context.Singers.FirstOrDefault(s => s.Name == singerName);
+            Singer singer = _context.Singers.FirstOrDefault(s => s.Name == singerName);
+            singer.Photo = GetSingerPhoto(singer.SingerId);
+            return singer;
         }
 
         public async Task<List<Singer>> GetSingersAsync(int pageSize = 1, int itemsPerPage = 20)
         {
-            return _context.Singers.Where(s => s.IsTop == 1).ToList();
+            List<Singer> singers = _context.Singers.Where(s => s.IsTop == 1).Skip((pageSize - 1) * PageInfo.PageSize).Take(PageInfo.PageSize).ToList();
+            singers.ForEach(s => s.Photo = GetSingerPhoto(s.Name));
+            return singers;
         }
 
         public async Task<List<Song>> GetTopSongsAsync(string singerName)
@@ -142,24 +168,9 @@ namespace DatabaseModel.Models
             return _context.Songs.Where(s => s.SingerId == singerName).ToList();
         }
 
-        public void UpdateAlbums(Album item)
+        public void AddSimiliarMaps(List<Singer> simList, string singerName)
         {
-            _context.Entry(item).State = EntityState.Modified;
-        }
-
-        public void UpdateSingers(Singer item)
-        {
-            _context.Entry(item).State = EntityState.Modified;
-        }
-
-        public void UpdateSongs(Song item)
-        {
-            _context.Entry(item).State = EntityState.Modified;
-        }
-
-        public void AddSimiliarMaps(List<SimiliarMap> maps)
-        {
-            throw new NotImplementedException();
+            simList.ForEach(s => AddSimiliarMap(s.Name, singerName));
         }
     }
 }

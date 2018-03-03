@@ -20,8 +20,13 @@ namespace BuisnessModel.Models
         }
         public async Task<List<Song>> GetTopSongsAsync(string singerName)
         {
-            List<Song> songs = await _lastSongRepo.GetTopSongsAsync(singerName);
-            _dbRepo.AddSongs(songs);
+            List<Song> songs;
+            songs = await _dbRepo.GetTopSongsAsync(singerName);
+            if(songs.Count == 0)
+            {
+                songs = await _lastSongRepo.GetTopSongsAsync(singerName);
+                _dbRepo.AddSongs(songs);
+            }
             return songs;
         }
     }

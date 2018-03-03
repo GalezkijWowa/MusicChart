@@ -22,21 +22,32 @@ namespace BuisnessModel.Models
         public async Task<Album> GetAlbumInfoAsync(string singerName, string albumName)
         {
             Album album = await _lastAlbumRepo.GetAlbumInfoAsync(singerName, albumName);
-            _dbRepo.AddAlbum(album);
+            //_dbRepo.AddAlbum(album);
             return album;
         }
 
         public async Task<List<Song>> GetAlbumSongsAsync(string singerName, string albumName)
         {
-            List<Song> songs = await _lastAlbumRepo.GetAlbumSongsAsync(singerName, albumName);
-            _dbRepo.AddSongs(songs);
+            List<Song> songs;
+            songs = await _dbRepo.GetAlbumSongsAsync(singerName, albumName);
+
+            if(songs.Count == 0)
+            {
+                songs = await _lastAlbumRepo.GetAlbumSongsAsync(singerName, albumName);
+                _dbRepo.AddSongs(songs);
+            }
             return songs;
         }
 
         public async Task<List<Album>> GetSingerAlbumsAsync(string singerName)
         {
-            List<Album> albums = await _lastAlbumRepo.GetSingerAlbumsAsync(singerName);
-            _dbRepo.AddAlbums(albums);
+            List<Album> albums;
+            albums = await _dbRepo.GetSingerAlbumsAsync(singerName);
+            if(albums.Count == 0)
+            {
+                albums = await _lastAlbumRepo.GetSingerAlbumsAsync(singerName);
+                _dbRepo.AddAlbums(albums);
+            }
             return albums;
         }
     }

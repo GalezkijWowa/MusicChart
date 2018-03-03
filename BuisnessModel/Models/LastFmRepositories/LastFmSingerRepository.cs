@@ -59,13 +59,13 @@ namespace BuisnessModel.Models
             return singer;
         }
 
-        public async Task<List<Singer>> GetSingersAsync(int pageSize = 1, int itemsPerPage = 20)
+        public async Task<List<Singer>> GetSingersAsync(int page = 1, int itemsPerPage = 20)
         {
-            PageResponse<LastArtist> _resp = await new ChartApi(_lastAuth).GetTopArtistsAsync(1, 100);
+            PageResponse<LastArtist> _resp = await new ChartApi(_lastAuth).GetTopArtistsAsync(page, itemsPerPage);
             List<Singer> singers = new List<Singer>();
             Singer topSinger;
-            //.Skip((pageSize - 1) * PageInfo.PageSize).Take(PageInfo.PageSize).ToList()
-            foreach (var artist in _resp.Content.Skip((pageSize - 1) * PageInfo.PageSize).Take(PageInfo.PageSize).ToList())
+            //.Skip((page - 1) * PageInfo.PageSize).Take(PageInfo.PageSize).ToList()
+            foreach (var artist in _resp.Content.Skip((page - 1) * PageInfo.PageSize).Take(PageInfo.PageSize).ToList())
             {
                 topSinger = await GetSingerInfoAsync(artist.Name);
                 topSinger.IsTop = 1;
