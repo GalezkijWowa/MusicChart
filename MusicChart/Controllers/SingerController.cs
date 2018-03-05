@@ -7,6 +7,10 @@ using BuisnessModel.Models;
 using EntityModel.Models.ViewModels;
 using DatabaseModel.Data;
 using EntityModel.Models;
+using System.Net;
+using static System.IO.File;
+using System.Web;
+using System.IO;
 
 namespace MusicChart.Controllers
 {
@@ -86,6 +90,19 @@ namespace MusicChart.Controllers
                 Album = album,
                 Songs = songs
             });
+        }
+
+        [HttpGet]
+        public IActionResult DownloadSong(string path, string id)
+        {
+            //Uri uri = new Uri(@"d:\\songs");
+            //using (var client = new WebClient())
+            //{
+            //    client.DownloadFile(@"https://www.last.fm/music/+free-music-downloads", "Sabaton — Carolus Rex.mp3");
+
+            //}
+            Copy(@"d:\songs\Death Grips - Get Got.mp3", @"d:\moved\Death Grips - Get Got.mp3");   
+            return RedirectToAction("Singer", "Singer", new { id });
         }
     }
 }

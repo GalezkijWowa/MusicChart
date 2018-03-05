@@ -9,12 +9,30 @@ using System.Threading.Tasks;
 
 namespace BuisnessModel.Models
 {
-    public class LastFmSongRepository : ISongRepository
+    public class LastFmSongRepository : IRemoteSongRepository
     {
         private ILastAuth _lastAuth;
         public LastFmSongRepository()
         {
             _lastAuth = new LastAuth("96d047d302a8707f3a7410873466dbfd", "3afdcf3ccad058a82202544549cb141b");
+        }
+
+        public async void AddPath(string singerName, string songName, string path)
+        {
+            PageResponse<LastTrack> resp = await new ArtistApi(_lastAuth).GetTopTracksForArtistAsync(singerName);
+
+        }
+
+        public async Task<Song> GetSong(string singerName, string songName)
+        {
+            LastResponse<LastTrack> resp = await new TrackApi(_lastAuth).GetInfoAsync(songName, singerName);
+            Console.WriteLine("sad");
+            return new Song
+            {
+                Name = resp.Content.Name,
+                SongId = resp.Content.Name,
+                SingerId = resp.Content.ArtistName
+            };
         }
 
         public async Task<List<Song>> GetTopSongsAsync(string singerName)

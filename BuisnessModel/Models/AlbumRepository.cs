@@ -11,7 +11,7 @@ namespace BuisnessModel.Models
     public class AlbumRepository : IAlbumRepository
     {
         private IContextRepository _dbRepo;
-        private IAlbumRepository _lastAlbumRepo;
+        private IRemoteAlbumRepository _lastAlbumRepo;
 
         public AlbumRepository(ApplicationDbContext dbContext)
         {
@@ -22,7 +22,7 @@ namespace BuisnessModel.Models
         public async Task<Album> GetAlbumInfoAsync(string singerName, string albumName)
         {
             Album album = await _lastAlbumRepo.GetAlbumInfoAsync(singerName, albumName);
-            //_dbRepo.AddAlbum(album);
+            _dbRepo.AddAlbum(album);
             return album;
         }
 

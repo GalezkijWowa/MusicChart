@@ -18,6 +18,12 @@
                         <li>
                             <div class="info">
                                 <h2 class="title">@s.Name</h2>
+                                @if(s.Path != null)
+                                {
+                                    <a asp-controller="Singer" asp-action="DownloadSong" asp-route-id=@Model.Singer.SingerId asp-route-path=@s.Path class="btn btn-info btn-lg">
+                                        <span class="glyphicon glyphicon-download-alt"></span> Download
+                                    </a>
+                                }  
                             </div>
                         </li>
                     }

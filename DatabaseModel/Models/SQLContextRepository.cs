@@ -108,7 +108,6 @@ namespace DatabaseModel.Models
             return _context.Images.FirstOrDefault(p => p.ImageId == _context.Albums.FirstOrDefault(a => a.Name == albumName).ImageId);
         }
         
-
         public async Task<Album> GetAlbumInfoAsync(string singerName, string albumName)
         {
             return _context.Albums.FirstOrDefault(a => a.SingerId == singerName && a.Name == albumName);
@@ -171,6 +170,26 @@ namespace DatabaseModel.Models
         public void AddSimiliarMaps(List<Singer> simList, string singerName)
         {
             simList.ForEach(s => AddSimiliarMap(s.Name, singerName));
+        }
+
+        public async Task<Song> GetSong(string singerName, string songName)
+        {
+            return _context.Songs.FirstOrDefault(s => s.Name == songName && s.SingerId == singerName); 
+        }
+
+        public bool AddPath(string singerName, string songName, string path)
+        {
+            Song song = _context.Songs.FirstOrDefault(s => s.Name == songName && s.SingerId == singerName);
+
+            if(song != null && (song.Path == null || song.Path != path))
+            {
+                Console.WriteLine("pass == null");
+                song.Path = path;
+                _context.Songs.Update(song);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
         }
     }
 }

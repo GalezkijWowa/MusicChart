@@ -14,5 +14,6 @@ namespace EntityModel.Models
         public string Name { get; set; }
         public string SingerId { get; set; }
         public string AlbumName { get; set; }
+        public string Path { get; set; }
     }
 }

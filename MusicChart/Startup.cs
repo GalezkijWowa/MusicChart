@@ -27,8 +27,7 @@ namespace MusicChart
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("DatabaseModel")));
+                services.AddDbContext<ApplicationDbContext>();
             }
             services.AddAutoMapper();
             services.AddMvc();

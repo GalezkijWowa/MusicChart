@@ -11,13 +11,23 @@ namespace BuisnessModel.Models
     public class SongRepository : ISongRepository
     {
         private IContextRepository _dbRepo;
-        private ISongRepository _lastSongRepo;
+        private IRemoteSongRepository _lastSongRepo;
 
         public SongRepository(ApplicationDbContext dbContext)
         {
             _dbRepo = new SQLContextRepository(dbContext);
             _lastSongRepo = new LastFmSongRepository();
         }
+
+        public async Task GetSong(string singerName, string songName, string path)
+        {
+            _lastSongRepo.GetSong(singerName, songName);
+            Console.WriteLine("qwe");
+            //song.Path = path;
+            //_dbRepo.AddSong(song);
+            //Console.WriteLine("GetSong");
+        }
+
         public async Task<List<Song>> GetTopSongsAsync(string singerName)
         {
             List<Song> songs;

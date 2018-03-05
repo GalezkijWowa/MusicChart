@@ -1,5 +1,4 @@
-﻿
-using EntityModel.Models;
+﻿using EntityModel.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,6 +15,8 @@ namespace DatabaseModel.Models
         void AddSinger(Singer item);
         void AddSong(Song item);
         void AddAlbum(Album item);
+        bool AddPath(string singerName,string songName, string path);
+
         void AddSimiliarMap(string simName, string singerName);
         void AddSimiliarMaps(List<Singer> simList, string singerName);
 
@@ -28,7 +29,9 @@ namespace DatabaseModel.Models
         Task<List<Album>> GetSingerAlbumsAsync(string singerName);
         Task<Album> GetAlbumInfoAsync(string singerName, string albumName);
         Task<List<Song>> GetAlbumSongsAsync(string singerName, string albumName);
-
         Task<List<Song>> GetTopSongsAsync(string singerName);
+
+        Task<Song> GetSong(string singerName, string songName);
+        
     }
 }

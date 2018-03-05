@@ -11,7 +11,7 @@ namespace BuisnessModel.Models
     public class SingerRepository : ISingerRepository
     {
         private IContextRepository _dbRepo;
-        private ISingerRepository _lastSingerRepo;
+        private IRemoteSingerRepository _lastSingerRepo;
 
         public SingerRepository(ApplicationDbContext dbContext)
         {

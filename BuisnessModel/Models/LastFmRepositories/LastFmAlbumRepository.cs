@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BuisnessModel.Models
 {
-    public class LastFmAlbumRepository : IAlbumRepository
+    public class LastFmAlbumRepository : IRemoteAlbumRepository
     {
         private ILastAuth _lastAuth;
         public LastFmAlbumRepository()

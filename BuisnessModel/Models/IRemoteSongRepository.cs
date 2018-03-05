@@ -1,14 +1,14 @@
 ﻿using EntityModel.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace BuisnessModel.Models
 {
-    public interface ISongRepository
+    public interface IRemoteSongRepository
     {
         Task<List<Song>> GetTopSongsAsync(string singerName);
-        Task GetSong(string singerName, string songName, string path);
+        Task<Song> GetSong(string singerName, string songName);
     }
 }
