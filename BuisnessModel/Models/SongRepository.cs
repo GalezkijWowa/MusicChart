@@ -21,11 +21,11 @@ namespace BuisnessModel.Models
 
         public async Task GetSong(string singerName, string songName, string path)
         {
-            _lastSongRepo.GetSong(singerName, songName);
+            Song song = await _lastSongRepo.GetSong(singerName, songName);
             Console.WriteLine("qwe");
-            //song.Path = path;
-            //_dbRepo.AddSong(song);
-            //Console.WriteLine("GetSong");
+            song.Path = path;
+            _dbRepo.AddSong(song);
+            Console.WriteLine("GetSong");
         }
 
         public async Task<List<Song>> GetTopSongsAsync(string singerName)
