@@ -27,6 +27,11 @@ namespace MusicChart.Controllers
             _albumRepo = new AlbumRepository(dbContext);
         }
 
+        public async Task<IActionResult> Song(string singerName, string singerSong)
+        {
+            Song song = await _songRepo.GetSong(singerName, singerSong, "qwe");
+        }
+
         public async Task<IActionResult> SingerList(int page = 1)
         {
             List<Singer> singers = await _singerRepo.GetSingersAsync(page, PageInfo.PageSize);

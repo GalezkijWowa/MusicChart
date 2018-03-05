@@ -26,7 +26,7 @@ namespace BuisnessModel.Models
         public async Task<Song> GetSong(string singerName, string songName)
         {
             LastResponse<LastTrack> resp = await new TrackApi(_lastAuth).GetInfoAsync(songName, singerName);
-            Console.WriteLine("Don't come here");
+            //Console.WriteLine("Don't come here");
             return new Song
             {
                 Name = resp.Content.Name,
