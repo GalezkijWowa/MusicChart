@@ -25,7 +25,7 @@ namespace MusicChartConsole.Models
             {
                 return;
             }
-            _repository.GetSong(singerName, songName, path);
+            await _repository.GetSong(singerName, songName, path);
             Console.WriteLine("q");
         }
     }

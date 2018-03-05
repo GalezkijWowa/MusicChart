@@ -33,6 +33,8 @@ namespace BuisnessModel.Models
                 SongId = resp.Content.Name,
                 SingerId = resp.Content.ArtistName
             };
+            //РАботеат ли метод с веба и вызвать методЮ который работает на вебе из консоли
+            //Создать папку в веб проекте и оти туда дергать урлы
         }
 
         public async Task<List<Song>> GetTopSongsAsync(string singerName)

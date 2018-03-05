@@ -22,7 +22,7 @@ namespace MusicChartConsole
                 {
                     audio = new AudioFile(s, ReadStyle.Average);
                     fullPath = audio.Name;
-                    pathWriter.AddPath(audio.Tag.Performers[0], audio.Tag.Title, fullPath);
+                    await pathWriter.AddPath(audio.Tag.Performers[0], audio.Tag.Title, fullPath);
                 }
             }
             Console.WriteLine("end");
