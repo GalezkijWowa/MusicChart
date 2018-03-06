@@ -91,24 +91,14 @@ namespace MusicChart.Controllers
             });
         }
 
-        [HttpGet]
-        public IActionResult DownloadSong(string path, string id)
-        {
-            //Uri uri = new Uri(@"d:\\songs");
-            //using (var client = new WebClient())
-            //{
-            //    client.DownloadFile(@"https://www.last.fm/music/+free-music-downloads", "Sabaton — Carolus Rex.mp3");
-
-            //}
-            Copy(@"d:\songs\Death Grips - Get Got.mp3", @"d:\moved\Death Grips - Get Got.mp3");   
-            return RedirectToAction("Singer", "Singer", new { id });
-        }
-
-        public async Task<IActionResult> Song(string singerName, string singerSong)
-        {
-            Song song = await _songRepo.GetSong("Eminem", "Without you", "qwe");
-            return View("Song", song);
-        }
-
+        //[HttpGet]
+        //public IActionResult DownloadSong(string path, string id)
+        //{
+        //    using (var client = new WebClient())
+        //    {
+        //        client.DownloadFile(@"wwwroot/AudioFiles", path);
+        //    }  
+        //    return RedirectToAction("Singer", "Singer", new { id });
+        //}
     }
 }

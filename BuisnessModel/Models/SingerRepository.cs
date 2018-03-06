@@ -69,7 +69,7 @@ namespace BuisnessModel.Models
         {
             List<Singer> singers;
             singers = await _dbRepo.GetSingersAsync(page, itemsPerPage);
-            if (singers.Count == 0)
+            if (singers.Count < itemsPerPage)
             {
                 singers = await _lastSingerRepo.GetSingersAsync(page, itemsPerPage);
                 _dbRepo.AddSingers(singers);

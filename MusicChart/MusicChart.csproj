@@ -22,6 +22,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\AudioFiles\Best Coast - The Only Place.mp3" />
+    <None Include="wwwroot\AudioFiles\Chrome Sparks - All There Is %28Feat. Steffaloo%29.mp3" />
+    <None Include="wwwroot\AudioFiles\Death Grips - Blackjack.mp3" />
+    <None Include="wwwroot\AudioFiles\Death Grips - Get Got.mp3" />
+    <None Include="wwwroot\AudioFiles\Death Grips - I%27ve Seen Footage.mp3" />
+    <None Include="wwwroot\AudioFiles\Death Grips - Takyon %28Death Yon%29.mp3" />
+    <None Include="wwwroot\AudioFiles\Graveyard - Goliath.mp3" />
+    <None Include="wwwroot\AudioFiles\Maybeshewill - Co-Conspirators.mp3" />
+    <None Include="wwwroot\AudioFiles\Pictureplane - Goth Star.mp3" />
+    <None Include="wwwroot\AudioFiles\Poets of the Fall - Maybe Tomorrow is a Better Day.mp3" />
+    <None Include="wwwroot\AudioFiles\Пикник - У шамана три руки.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BuisnessModel\BuisnessModel.csproj" />
     <ProjectReference Include="..\DatabaseModel\DatabaseModel.csproj" />
     <ProjectReference Include="..\EntityModel\EntityModel.csproj" />
