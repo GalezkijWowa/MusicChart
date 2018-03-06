@@ -1,0 +1,8 @@
+﻿@model Song;
+@{
+    ViewData["Title"] = "Song";
+}
+
+<h2>@Model.Name</h2>
+<h3><a asp-controller="Singer" asp-action="Singer" asp-route-id=@Model.SongId>@Model.SingerId</a></h3>
+<h4>@Model.Path</h4>

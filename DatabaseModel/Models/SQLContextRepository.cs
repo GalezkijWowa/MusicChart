@@ -151,7 +151,10 @@ namespace DatabaseModel.Models
         public async Task<Singer> GetSingerInfoAsync(string singerName)
         {
             Singer singer = _context.Singers.FirstOrDefault(s => s.Name == singerName);
-            singer.Photo = GetSingerPhoto(singer.SingerId);
+            if(singer != null)
+            {
+                singer.Photo = GetSingerPhoto(singer.SingerId);
+            }
             return singer;
         }
 

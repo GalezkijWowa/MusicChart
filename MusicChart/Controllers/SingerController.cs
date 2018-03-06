@@ -26,12 +26,6 @@ namespace MusicChart.Controllers
             _songRepo = new SongRepository(dbContext);
             _albumRepo = new AlbumRepository(dbContext);
         }
-
-        public async Task<IActionResult> Song(string singerName, string singerSong)
-        {
-            Song song = await _songRepo.GetSong(singerName, singerSong, "qwe");
-        }
-
         public async Task<IActionResult> SingerList(int page = 1)
         {
             List<Singer> singers = await _singerRepo.GetSingersAsync(page, PageInfo.PageSize);
@@ -109,5 +103,12 @@ namespace MusicChart.Controllers
             Copy(@"d:\songs\Death Grips - Get Got.mp3", @"d:\moved\Death Grips - Get Got.mp3");   
             return RedirectToAction("Singer", "Singer", new { id });
         }
+
+        public async Task<IActionResult> Song(string singerName, string singerSong)
+        {
+            Song song = await _songRepo.GetSong("Eminem", "Without you", "qwe");
+            return View("Song", song);
+        }
+
     }
 }

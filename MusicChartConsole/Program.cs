@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using BuisnessModel.Models;
 using DatabaseModel.Data;
+using EntityModel.Models;
 using MusicChartConsole.Models;
 using TagLib;
 using TagLib.Mpeg;
@@ -25,8 +28,6 @@ namespace MusicChartConsole
                     await pathWriter.AddPath(audio.Tag.Performers[0], audio.Tag.Title, fullPath);
                 }
             }
-            Console.WriteLine("end");
-            Console.ReadLine();
         }
     }
 }

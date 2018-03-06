@@ -19,13 +19,9 @@ namespace BuisnessModel.Models
             _lastSongRepo = new LastFmSongRepository();
         }
 
-        public async Task GetSong(string singerName, string songName, string path)
+        public async Task<Song> GetSong(string singerName, string songName, string path)
         {
-            Song song = await _lastSongRepo.GetSong(singerName, songName);
-            Console.WriteLine("qwe");
-            song.Path = path;
-            _dbRepo.AddSong(song);
-            Console.WriteLine("GetSong");
+            return await _lastSongRepo.GetSong(singerName, songName);
         }
 
         public async Task<List<Song>> GetTopSongsAsync(string singerName)

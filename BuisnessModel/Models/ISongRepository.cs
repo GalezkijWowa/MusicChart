@@ -9,6 +9,6 @@ namespace BuisnessModel.Models
     public interface ISongRepository
     {
         Task<List<Song>> GetTopSongsAsync(string singerName);
-        Task GetSong(string singerName, string songName, string path);
+        Task<Song> GetSong(string singerName, string songName, string path);
     }
 }

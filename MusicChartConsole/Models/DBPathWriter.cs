@@ -9,14 +9,15 @@ namespace MusicChartConsole.Models
 {
     public class DbPathWriter
     {
-        private ISongRepository _repository;
+        private ISongRepository _songRepository;
         private IContextRepository _dbRepository;
-        
+        private ISingerRepository _singerRepository;
 
         public DbPathWriter(ApplicationDbContext context)
         {
-            _repository = new SongRepository(context);
+            _songRepository = new SongRepository(context);
             _dbRepository = new SQLContextRepository(context);
+            _singerRepository = new SingerRepository(context);
         }
 
         public async Task AddPath(string singerName, string songName, string path)
@@ -25,8 +26,17 @@ namespace MusicChartConsole.Models
             {
                 return;
             }
-            await _repository.GetSong(singerName, songName, path);
-            Console.WriteLine("q");
+            try
+            {
+                Singer singer = await _singerRepository.GetSingerInfoAsync(singerName);
+                _dbRepository.AddSinger(singer);
+                Song song = await _songRepository.GetSong(singerName, songName, path);
+                song.Path = path;
+                _dbRepository.AddSong(song);
+            }
+            catch(NullReferenceException e)
+            {
+            }
         }
     }
 }
